@@ -24,7 +24,7 @@ SECRET_KEY = '%9wc_*4mmq=9af=2zw9e0*--9290p!j2(ds-nuohb8hm3nzju9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sts-app.azurewebsites.net']
 
 # Application definition
 
@@ -75,7 +75,12 @@ WSGI_APPLICATION = 'STS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'STS2',
+        'NAME': 'STS',
+        'USER': 'sts',
+        'PASSWORD': 'CPFcqcgM091D7L4YXEw76AYQz7BORWnOzBhWFSTNWZO0LqLlAPkMEu1eowGd8zJin18rxT1PVvsb5wF1yV5zww==',
+        'HOST': 'mongodb://sts:CPFcqcgM091D7L4YXEw76AYQz7BORWnOzBhWFSTNWZO0LqLlAPkMEu1eowGd8zJin18rxT1PVvsb5wF1yV5zww==@sts.mongo.cosmos.azure.com:10255/STS?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@sts@',
+        'SSL' : 'true',
+
     }
 }
 
@@ -112,6 +117,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
 
