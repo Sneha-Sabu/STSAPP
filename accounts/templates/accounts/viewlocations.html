@@ -1,0 +1,129 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+    <br>
+
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+							<th>Attribute</th>
+							<th>Value</th>
+
+						</tr>
+
+ 							<tr>
+								<td>Location:</td>
+								<td>
+									{{entry.locations.name}}
+								</td>
+							</tr>
+							<tr>
+								<td>STS Position:</td>
+								<td>
+									{{entry.locations.STS_position}}
+								</td>
+							</tr>
+							<tr>
+								<td>Cargoes permitted:</td>
+								<td>
+									{{entry.locations.Cargos_permitted}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Type of Operation:</td>
+								<td>
+									{{entry.locations.Type_of_operation}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Oil Spill Responders:</td>
+								<td>
+									{{entry.emergencycontacts.Oil_Spill_Responders}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Primary Fenders:</td>
+								<td>
+									{{entry.equipment_details.Primary_Fenders}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Agent Company:</td>
+								<td>
+									{{entry.agent_details.Agent_Company}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Base Location:</td>
+								<td>
+									{{entry.base_details.Base_Location}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Notice Period:</td>
+								<td>
+									{{entry.notice_period.Notice_Period}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Vessel Name:</td>
+								<td>
+									{{entry.support_craft_details.Vessel_Name}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Tug Provider Company:</td>
+								<td>
+									{{entry.tug_provider_details.Tug_Provider_Company}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Location under the control of authorities:</td>
+								<td>
+									{{entry.area_details.Location_under_the_control_of_authorities}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Local Marine Activity:</td>
+								<td>
+									{{entry.navigational_hazards.Local_marine_activity}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Prevailing winds:</td>
+								<td>
+									{{entry.met_ocean_conditions.Prevailing_winds}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>Location adjacent to any public sensitive areas:</td>
+								<td>
+									{{entry.environmental_details.Location_adjacent_to_any_public_sensitive_areas}}
+								</td>
+							</tr>
+					</table>
+					<hr>
+					<img class="locations_pic" src="{{entry.locations_pic.url}}">
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+{% endblock %}

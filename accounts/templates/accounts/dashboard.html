@@ -1,0 +1,66 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+{% include 'accounts/status.html' %}
+<br/>
+    <div class="row">
+	<div class="col-md-6">
+		<h5>USERS</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+				</tr>
+				{% for i in user %}
+				<tr>
+					<td>
+						{{i.username}}
+					</td>
+					<td>
+						{{i.email}}
+					</td>
+
+				</tr>
+				{% endfor %}
+
+
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<h5>RECENT LOCATIONS</h5>
+		<hr>
+		<div class="card card-body">
+
+			<table class="table table-sm">
+				<tr>
+					<th>Location</th>
+					<th>STS position</th>
+					<th>Types of cargos transferred</th>
+
+				</tr>
+
+				{% for i in entry %}
+				<tr>
+					<td>
+						{{i.locations.name}}
+					</td>
+					<td>
+						{{i.locations.STS_position}}
+					</td>
+					<td>
+						{{i.locations.Cargos_permitted}}
+					</td>
+
+				</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

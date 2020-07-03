@@ -1,0 +1,54 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+    <br>
+
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<form method="get">
+                        {{entryFilter.form}}
+                    <button class="btn btn-primary" type="submit">Search</button>
+                        <a class="btn btn-primary" href="{% url 'create_locations' %}">Create Location</a>
+                  </form>
+
+				</div>
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+							<th>Location</th>
+							<th>STS Position</th>
+							<th>Types of cargos transferred</th>
+							<th>More details</th>
+
+						</tr>
+
+						{% for i in entry %}
+							<tr>
+								<td>
+									{{i.locations.name}}
+								</td>
+								<td>
+									{{i.locations.STS_position}}
+								</td>
+								<td>
+									{{i.locations.Cargos_permitted}}
+								</td>
+								<td>
+									<a class="btn btn-sm btn-info" href="{% url 'viewlocations' i.id %}">View</a>
+								</td>
+
+
+							</tr>
+						{% endfor %}
+
+					</table>
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+{% endblock %}

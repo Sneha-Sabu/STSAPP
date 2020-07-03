@@ -1,0 +1,32 @@
+	#logo{
+	        width: 150px !important;
+		}
+
+		body{
+			background-color: #ebeff5;
+		}
+
+		.bg-dark {
+            background-color: #FFCE1B !important;
+        }
+
+        .btn-primary {
+            background-color: #0065A5 !important;
+            border-color: #007bff !important;
+        }
+
+
+
+        h3 {
+
+        color: black !important;
+
+        }
+
+
+		.card-header{
+			background-color: #0065A5 !important ;
+		}
+
+
+
