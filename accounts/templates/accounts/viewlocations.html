@@ -117,7 +117,12 @@
 							</tr>
 					</table>
 					<hr>
-					<img class="locations_pic" src="{{entry.locations_pic.url}}">
+					{% if entry.locations_pic != null %}
+						<img src="{{entry.locations_pic.url}}">
+					{% elif entry.locations_pic == null %}
+						<p>No image</p>
+					{% endif %}
+
 				</div>
 			</div>
 
