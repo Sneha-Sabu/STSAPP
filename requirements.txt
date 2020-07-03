@@ -1,0 +1,4 @@
+django==2.2.9
+django-filter==2.3.0
+djongo==1.2.36
+sqlparse==0.2.4
