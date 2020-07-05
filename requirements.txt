@@ -3,3 +3,4 @@ django-filter==2.3.0
 djongo==1.2.36
 sqlparse==0.2.4
 Pillow==7.1.2
+dnspython==1.16.0
