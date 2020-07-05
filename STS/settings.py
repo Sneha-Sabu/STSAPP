@@ -76,9 +76,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'STS',
-        'USER': 'sts',
-        'PASSWORD': 'CPFcqcgM091D7L4YXEw76AYQz7BORWnOzBhWFSTNWZO0LqLlAPkMEu1eowGd8zJin18rxT1PVvsb5wF1yV5zww==',
-        'HOST': 'mongodb://sts:CPFcqcgM091D7L4YXEw76AYQz7BORWnOzBhWFSTNWZO0LqLlAPkMEu1eowGd8zJin18rxT1PVvsb5wF1yV5zww==@sts.mongo.cosmos.azure.com:10255/STS?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@sts@',
+        'USER': 'dbUser',
+        'PASSWORD': '123',
+        'HOST': 'mongodb+srv://dbUser:123@sts.flven.azure.mongodb.net/STS?retryWrites=true&w=majority',
         'SSL' : 'true',
 
     }
