@@ -207,6 +207,8 @@ class Entry(models.Model):
         model_form_class=Equipment_DetailsForm
     )
 
+    Agent_Company = models.CharField(max_length=1000, null=True, blank=True)
+
     agent_details = models.EmbeddedModelField(
         model_container=(Agent_Details),
         model_form_class=Agent_DetailsForm
@@ -226,6 +228,8 @@ class Entry(models.Model):
         model_container=(Support_Craft_Details),
         model_form_class=Support_Craft_DetailsForm
     )
+
+    Provider_Company = models.CharField(max_length=1000, null=True, blank=True)
 
     tug_provider_details = models.EmbeddedModelField(
         model_container=(Tug_Provider_Details),
@@ -252,6 +256,7 @@ class Entry(models.Model):
         model_form_class=Environmental_DetailsForm
     )
     locations_pic = models.ImageField(null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     objects = models.DjongoManager()
 
