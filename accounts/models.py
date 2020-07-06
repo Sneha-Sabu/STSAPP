@@ -9,6 +9,8 @@ class Locations(models.Model):
     name = models.CharField(max_length=200, null=True)
     fendering_position = models.CharField(max_length=1000, null=True, blank=True)
     STS_position = models.CharField(max_length=1000, null=True, blank=True)
+    STS_latitude = models.CharField(max_length=1000, null=True, blank=True)
+    STS_longitude = models.CharField(max_length=1000, null=True, blank=True)
     Cargos_permitted = models.CharField(max_length=1000, null=True, blank=True)
     Type_of_operation = models.CharField(max_length=1000, null=True, blank=True)
     Depth_of_water = models.CharField(max_length=1000, null=True, blank=True)
@@ -109,7 +111,7 @@ class LocationsForm(forms.ModelForm):
     class Meta:
         model = Locations
         fields = [
-                'name', 'fendering_position', 'STS_position', 'Cargos_permitted', 'Type_of_operation', 'Depth_of_water', 'Approval_to_conduct_STS_issued_by', 'Approval_needed_prior_to_each_STS_operation', 'Vessel_sizes_permitted', 'Night_time_berthing_permitted', 'Is_local_piloting_assistance_required', 'Are_tugs_required',
+                'name', 'fendering_position', 'STS_position', 'STS_latitude', 'STS_longitude', 'Cargos_permitted', 'Type_of_operation', 'Depth_of_water', 'Approval_to_conduct_STS_issued_by', 'Approval_needed_prior_to_each_STS_operation', 'Vessel_sizes_permitted', 'Night_time_berthing_permitted', 'Is_local_piloting_assistance_required', 'Are_tugs_required',
         ]
 
 class EmergencyContactsForm(forms.ModelForm):
