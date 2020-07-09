@@ -266,7 +266,21 @@ class Entry(models.Model):
         model_container=(Environmental_Details),
         model_form_class=Environmental_DetailsForm
     )
-    locations_pic = models.ImageField(null=True, blank=True)
+
+    CHOICES = (
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5')
+    )
+
+    number_of_images = models.CharField(max_length=15, null=True)
+    Image1 = models.ImageField(null=True, blank=True)
+    Image2 = models.ImageField(null=True, blank=True)
+    Image3 = models.ImageField(null=True, blank=True)
+    Image4 = models.ImageField(null=True, blank=True)
+    Image5 = models.ImageField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     objects = models.DjongoManager()

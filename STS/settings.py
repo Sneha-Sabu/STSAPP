@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'user_sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jquery',
     'accounts',
     'django_filters',
 ]
