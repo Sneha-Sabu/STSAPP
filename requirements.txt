@@ -5,3 +5,4 @@ sqlparse==0.2.4
 Pillow==7.1.2
 dnspython==1.16.0
 django-multiselectfield==0.1.12
+django-user-sessions==1.7.1
