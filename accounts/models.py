@@ -240,7 +240,7 @@ class Entry(models.Model):
         model_form_class=Support_Craft_DetailsForm
     )
 
-    Provider_Company = models.CharField(max_length=1000, null=True, blank=True)
+    Provider_company = models.CharField(max_length=1000, null=True, blank=True)
 
     tug_provider_details = models.EmbeddedModelField(
         model_container=(Tug_Provider_Details),
