@@ -1,8 +1,16 @@
 from __future__ import unicode_literals
 from djongo import models
 from django import forms
+from multiselectfield import MultiSelectField
+
 
 # Create your models here.
+
+Cargoes_Permitted = ((1, 'Oil'),
+                     (2, 'LPG'),
+                     (3, 'Chemicals'),
+                     (4, 'LNG'),
+                     (5, 'All cargoes permitted'))
 
 
 class Locations(models.Model):
@@ -11,14 +19,15 @@ class Locations(models.Model):
     STS_position = models.CharField(max_length=1000, null=True, blank=True)
     STS_latitude = models.FloatField(null=True, blank=True)
     STS_longitude = models.FloatField(null=True, blank=True)
-    Cargos_permitted = models.CharField(max_length=1000, null=True, blank=True)
+    Cargos_permitted = MultiSelectField(choices=Cargoes_Permitted, max_choices=5, max_length=1000, null=True, blank=True )
     Type_of_operation = models.CharField(max_length=1000, null=True, blank=True)
     Depth_of_water = models.CharField(max_length=1000, null=True, blank=True)
     Approval_to_conduct_STS_issued_by = models.CharField(max_length=1000, null=True, blank=True)
     Approval_needed_prior_to_each_STS_operation = models.CharField(max_length=1000, null=True, blank=True)
     Vessel_sizes_permitted = models.CharField(max_length=1000, null=True, blank=True)
     Night_time_berthing_permitted = models.CharField(max_length=1000, null=True, blank=True)
-    Is_local_piloting_assistance_required = models.CharField(max_length=1000, null=True, blank=True)
+    Is_local_piloting_assistance_required = models.CharField(max_length=1000, choices=[('Yes', 'Yes'), ('No', 'No')], null=True, blank=True)
+    Local_piloting_additional_information = models.CharField(max_length=1000, null=True, blank=True)
     Are_tugs_required = models.CharField(max_length=1000, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     locations_pic = models.ImageField(null=True, blank=True)
@@ -111,7 +120,7 @@ class LocationsForm(forms.ModelForm):
     class Meta:
         model = Locations
         fields = [
-                'name', 'fendering_position', 'STS_position', 'STS_latitude', 'STS_longitude', 'Cargos_permitted', 'Type_of_operation', 'Depth_of_water', 'Approval_to_conduct_STS_issued_by', 'Approval_needed_prior_to_each_STS_operation', 'Vessel_sizes_permitted', 'Night_time_berthing_permitted', 'Is_local_piloting_assistance_required', 'Are_tugs_required',
+                'name', 'fendering_position', 'STS_position', 'STS_latitude','STS_longitude','Cargos_permitted', 'Type_of_operation', 'Depth_of_water', 'Approval_to_conduct_STS_issued_by', 'Approval_needed_prior_to_each_STS_operation', 'Vessel_sizes_permitted', 'Night_time_berthing_permitted', 'Is_local_piloting_assistance_required', 'Local_piloting_additional_information','Are_tugs_required',
         ]
 
 class EmergencyContactsForm(forms.ModelForm):
