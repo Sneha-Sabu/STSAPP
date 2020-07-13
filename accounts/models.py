@@ -288,6 +288,10 @@ class Entry(models.Model):
     def __str__(self):
         return self.locations.name
 
+class BlackList(models.Model):
+    list = models.CharField(max_length=1000, null=True, blank=True)
+    def __str__(self):
+        return self.list
 
 
 

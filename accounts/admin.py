@@ -1,14 +1,33 @@
 from django.contrib import admin
+from django.contrib.admin.models import LogEntry
+
 
 
 # Register your models here.
 from .models import *
-from accounts.models import Entry
+from accounts.models import Entry, BlackList
 from accounts.forms import EntryForm
 
 # Register your models here.
 from django.conf.urls.static import static
 
+class LogEntryAdmin(admin.ModelAdmin):
+    list_display = ('user', 'action_time', 'content_type', 'action_flag','change_message')
+    search_fields = [
+        'object_repr',
+        'change_message'
+    ]
+
+    # keep only view permission
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+admin.site.register(LogEntry, LogEntryAdmin)
 
 
 class EntryAdmin(admin.ModelAdmin):
@@ -51,3 +70,4 @@ class EntryAdmin(admin.ModelAdmin):
         js = ('//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', 'accounts/js/base.js',)
 
 admin.site.register(Entry, EntryAdmin)
+admin.site.register(BlackList)

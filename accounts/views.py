@@ -70,38 +70,74 @@ def createLocations(request):
     return render(request, 'accounts/locations.html', context)
 
 
-@unauthenticated_user
-def registerPage(request):
-    form = CreateUserForm()
+
+def login3(request):
+    messages.info(request, 'Username or password wrong, you have last chance.')
     if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            username = form.cleaned_data.get('username')
+        username = request.POST.get('username')  # Get username input first
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        BL = BlackList.objects.values_list('list', flat=True)  # Read all data into array
+        if username in BL:  # Check if the username is in blacklist
+            messages.info(request, 'Username in black list, please contact admin')
+        else:  # Not in black list username can go to login
 
-            group = Group.objects.get(name='users')
-            user.groups.add(group)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                BlackList.objects.create(list=username)
+                # Put the username in to BlackList
+                messages.info(request, 'Username in black list now, please contact admin')
 
-            messages.success(request, 'Account was created for ' + username)
-            return redirect('/login')
+    context = {}
+    return render(request, 'accounts/login3.html', context)
 
-    context = {'form': form}
-    return render(request, 'accounts/register.html', context)
+
+def login2(request):
+    messages.info(request, 'Username or password wrong, you have 2 chances.')
+    if request.method == "POST":
+        username = request.POST.get('username')  # Get username input first
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        BL = BlackList.objects.values_list('list', flat=True)  # Read all data into array
+        if username in BL:  # Check if the username is in blacklist
+            messages.info(request, 'Username in black list, please contact admin')
+        else:  # Not in black list username can go to login
+
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                return redirect('/login3')
+
+    context = {}
+    return render(request, 'accounts/login2.html', context)
 
 
 @unauthenticated_user
 def loginPage(request):
     if request.method == "POST":
         username = request.POST.get('username')
+        username = request.POST.get('username')  # Get username input first
         password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
+        BL = BlackList.objects.values_list('list', flat=True)  # Read all data into array
+        if username in BL:  # Check if the username is in blacklist
+            messages.info(request, 'Username in black list, please contact admin')
+        else:  # Not in black list username can go to login
 
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.info(request, 'Username or Password is incorrect')
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.info(request, 'Username or Password is incorrect')
+                if user is not None:
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    return redirect('/login2')
 
     context = {}
     return render(request, 'accounts/login.html', context)
