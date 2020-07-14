@@ -2,24 +2,30 @@
 <html>
   <head>
     <title>Interactive maps for Django web apps</title>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+
   </head>
   <body>
-   <div id='map' width="100%" style="height:800px"></div>
-   <script>
+   <center>
+    <div id='map' style='width: 1920px; height: 300px;'></div>
+    <script>
+
     mapboxgl.accessToken = 'pk.eyJ1IjoiYm93ZW41NTYiLCJhIjoiY2tjOTQ5aW5nMTEydDJ6cDhmcWZ1bDE5aCJ9.ozE9fn01nK5TQ3VpdgOPHw';
     var map = new mapboxgl.Map({
-     container: 'map',
-     style: 'mapbox://styles/mapbox/satellite-streets-v10',
-     center: [{{entry.locations.STS_longitude}}, {{entry.locations.STS_latitude}}],
-     zoom: 5,
-     bearing: 180,
-     light: {
-        "anchor": "viewport",
-        "color": "white",
-        "intensity": 0.4},
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+    center: [{{entry.STS_Longitude}}, {{entry.STS_Latitude}}],
+    zoom: 2,
+
     });
-   </script>
+     var marker = new mapboxgl.Marker()
+    .setLngLat([{{entry.STS_Longitude}}, {{entry.STS_Latitude}}])
+    .addTo(map);
+
+
+    </script>
+    </center>
   </body>
 </html>

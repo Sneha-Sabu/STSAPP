@@ -34,7 +34,10 @@ class EntryAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Number of Images', {
-            'fields': ('Location_Name','locations','emergencycontacts','equipment_details','Agent_Company','agent_details','base_details','notice_period','support_craft_details','Provider_company','tug_provider_details','area_details','navigational_hazards','met_ocean_conditions','environmental_details','number_of_images',),
+            'fields': ('Location_Name','locations','emergencycontacts','equipment_details','Agent_Company','agent_details','base_details','notice_period',
+                       'support_craft_details','Provider_company','tug_provider_details','area_details','navigational_hazards','met_ocean_conditions',
+                       'environmental_details','degrees_latitude', 'minutes_latitude','seconds_latitude','degrees_longitude', 'minutes_longitude',
+                       'seconds_longitude', 'STS_Latitude','STS_Longitude','number_of_images'),
             'classes': ('predefined',)
         }),
         (None, {

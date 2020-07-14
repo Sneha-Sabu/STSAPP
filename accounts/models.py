@@ -16,9 +16,6 @@ Cargoes_Permitted = ((1, 'Oil'),
 class Locations(models.Model):
     name = models.CharField(max_length=200, null=True)
     fendering_position = models.CharField(max_length=1000, null=True, blank=True)
-    STS_position = models.CharField(max_length=1000, null=True, blank=True)
-    STS_latitude = models.FloatField(null=True, blank=True)
-    STS_longitude = models.FloatField(null=True, blank=True)
     Cargos_permitted = MultiSelectField(choices=Cargoes_Permitted, max_choices=5, max_length=1000, null=True, blank=True )
     Type_of_operation = models.CharField(max_length=1000, null=True, blank=True)
     Depth_of_water = models.CharField(max_length=1000, null=True, blank=True)
@@ -120,7 +117,7 @@ class LocationsForm(forms.ModelForm):
     class Meta:
         model = Locations
         fields = [
-                'name', 'fendering_position', 'STS_position', 'STS_latitude','STS_longitude','Cargos_permitted', 'Type_of_operation', 'Depth_of_water', 'Approval_to_conduct_STS_issued_by', 'Approval_needed_prior_to_each_STS_operation', 'Vessel_sizes_permitted', 'Night_time_berthing_permitted', 'Is_local_piloting_assistance_required', 'Local_piloting_additional_information','Are_tugs_required',
+                'name', 'fendering_position', 'Cargos_permitted', 'Type_of_operation', 'Depth_of_water', 'Approval_to_conduct_STS_issued_by', 'Approval_needed_prior_to_each_STS_operation', 'Vessel_sizes_permitted', 'Night_time_berthing_permitted', 'Is_local_piloting_assistance_required', 'Local_piloting_additional_information','Are_tugs_required',
         ]
 
 class EmergencyContactsForm(forms.ModelForm):
@@ -266,6 +263,22 @@ class Entry(models.Model):
         model_container=(Environmental_Details),
         model_form_class=Environmental_DetailsForm
     )
+
+    degrees_latitude = models.FloatField(null=True, blank=True)
+    minutes_latitude = models.IntegerField(null=True, blank=True)
+    seconds_latitude = models.IntegerField(null=True, blank=True)
+    degrees_longitude = models.FloatField(null=True, blank=True)
+    minutes_longitude = models.IntegerField(null=True, blank=True)
+    seconds_longitude = models.IntegerField(null=True, blank=True)
+    STS_Latitude = models.FloatField(null=True, blank=True)
+    STS_Longitude = models.FloatField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.STS_Latitude = float(
+            self.degrees_latitude + (self.minutes_latitude / 60) + (self.seconds_latitude / 3600))
+        self.STS_Longitude = float(
+            self.degrees_longitude + (self.minutes_longitude / 60) + (self.seconds_longitude / 3600))
+        super().save(*args, **kwargs)
 
     CHOICES = (
         ('1', '1'),
