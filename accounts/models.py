@@ -32,6 +32,11 @@ class Locations(models.Model):
     def __str__(self):
         return self.name
 
+class Region(models.Model):
+    Name = models.CharField(max_length=200, null=True)
+    def __str__(self):
+        return self.Name
+
 class EmergencyContacts(models.Model):
     Oil_Spill_Responders = models.CharField(max_length=1000, null=True, blank=True)
     Local_Emergency_Medical_Assistance = models.CharField(max_length=1000, null=True, blank=True)
@@ -200,6 +205,7 @@ class Environmental_DetailsForm(forms.ModelForm):
 
 class Entry(models.Model):
     Location_Name = models.CharField(max_length=200, null=True)
+    region = models.CharField(max_length=200, null=True, default='uncategorized')
     locations = models.EmbeddedModelField(
         model_container=(Locations),
         model_form_class=LocationsForm

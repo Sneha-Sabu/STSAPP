@@ -13,5 +13,7 @@ urlpatterns = [
     path('login3/', views.login3, name="login3"),
     path('logout/', views.logoutUser, name="logout"),
     path('user_profile/', views.userProfile, name="profile"),
+    path('region/<str:cats>/', views.Region, name="region"),
+    path('allregions/', views.allRegions, name="allregions"),
 
 ]
