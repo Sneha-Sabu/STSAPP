@@ -302,9 +302,13 @@ class Entry(models.Model):
         return self.locations.name
 
 class BlackList(models.Model):
-    list = models.CharField(max_length=1000, null=True, blank=True)
+    username = models.CharField(max_length=1000, null=True, blank=True)
+    flag1 = models.BooleanField(default=False)
+    flag2 = models.BooleanField(default=False)
+    flag3 = models.BooleanField(default=False)
+
     def __str__(self):
-        return self.list
+        return self.username
 
 
 
