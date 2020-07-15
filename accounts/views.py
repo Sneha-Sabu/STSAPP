@@ -85,7 +85,6 @@ def createLocations(request):
     return render(request, 'accounts/locations.html', context)
 
 
-
 def login3(request):
     if request.method == "POST":
         username = request.POST.get('username')  # Get username input first
@@ -136,6 +135,9 @@ def login2(request):
         if black_list_user.flag1 is False:  # Check if the username is in blacklist
             messages.info(request, 'You should not be here.')
             return redirect('/login')
+        elif black_list_user.flag3 is True:
+            messages.info(request, 'You are in black list, please contact admin.')
+            return redirect('/login2')
         elif black_list_user.flag2 is True:
             messages.info(request, 'Nice try, but you should not be here.')
             return redirect('/login3')
@@ -148,7 +150,7 @@ def login2(request):
             else:
                 black_list_user.flag2 = True
                 black_list_user.save()
-                messages.info(request, 'Username or password wrong, you have 1 chance.')
+                messages.info(request, 'Username or password wrong, you have last chance.')
                 return redirect('/login3')
 
     context = {}
@@ -165,7 +167,11 @@ def loginPage(request):
 
         if username in BL:  # Check if the username is in blacklist
             black_list_user = BlackList.objects.get(username=username)
-            if black_list_user.flag1 is True and black_list_user.flag2 is True:
+
+            if black_list_user.flag3 is True:
+                messages.info(request, 'You are in black list, please contact admin.')
+
+            elif black_list_user.flag2 is True:
                 messages.info(request, 'Nice try, but you should not be here.')
                 return redirect('/login3')
             elif black_list_user.flag1 is True and black_list_user.flag2 is False:
@@ -178,16 +184,17 @@ def loginPage(request):
                 else:
                     black_list_user.flag1 = True
                     black_list_user.save()
+                    messages.info(request, 'Username or password wrong, you have two chances.')
                     return redirect('/login2')
 
-        else:  # Not in black list username can go to login
+        else:
 
             if user is not None:
                 login(request, user)
                 return redirect('home')
             else:
                 BlackList.objects.create(username=username, flag1=True, flag2=False, flag3=False)
-                messages.info(request, 'Username or password wrong, you have 2 chances.')
+                messages.info(request, 'Username or password wrong, you have two chances.')
                 return redirect('/login2')
 
     context = {}
