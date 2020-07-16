@@ -1,161 +1,681 @@
 {% extends 'accounts/main.html' %}
 {% block content %}
-{% include 'accounts/map.html' %}
-    <br>
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+<style>
+.row1 {
+	 background:#0065a5;
+	 height: 60px;
+}
+body {
+	 background-color: #ffffff;
+}
+#base, #agent, #equipment, #notice, #supportcraft {
+	 width: 100%;
+	 padding: 50px 0;
+	 margin-top: 20px;
+	 display: none;
+
+}
+
+h2 {
+	color: #ffffff;
+	padding: 10px;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+h4 {
+	color: #ffffff;
+	font-size: 18px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-right: 5px;
+	border-bottom: 1px solid #ffffff;
+}
+
+.col-md-2.left {
+	padding-right: 0px;
+	background-color: #0065a5;
+}
+.col-md-7 {
+	height:500px;
+}
+
+.titles {
+	margin: 10px;
+}
+
+i.fas.fa-angle-right {
+	color: #ffffff;
+	font-size: 36px;
+}
+.scrollbar {
+	height: 500px;
+	background: #fff;
+	overflow-y: scroll;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+	background-color: #0065a5;
+}
+
+.scrollbar-primary {
+	scrollbar-color: #4285F4 #F5F5F5;
+}
+</style>
+
+		<div class="row1">
+			<div class="col-md-2 left">
+			</div>
+			<div class="col-md-7">
+				<center>
+					<h2>Information on {{entry.locations.name}}</h2>
+				</center>
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
 
 		<div class="row">
-			<div class="col-md">
-				<div class="card card-body">
-					<table class="table table-striped table-responsive-md btn-table">
-						<tr>
-							<th>Attribute</th>
-							<th>Value</th>
+			<div class="col-md-2 left">
+				<div class="titles">
+					<div onclick="basic()">
+						<div id="titles1">
+							<table>
+								<tr>
+									<td>
+										<h4>BASIC DETAILS</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div onclick="base()">
+						<div id="titles2">
+							<table>
+								<tr>
+									<td>
+										<h4>BASE DETAILS</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right' style='font-size:36px'></i>
+									</td>
+								</tr>
+							</table>
 
-						</tr>
+						</div>
+					</div>
+					<div onclick="agent()">
+						<div id="titles3">
+							<table>
+								<tr>
+									<td>
+										<h4>AGENT DETAILS</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right' style='font-size:36px'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div onclick="equipment()">
+						<div id="titles4">
+							<table>
+								<tr>
+									<td>
+										<h4>EQUIPMENT DETAILS</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right' style='font-size:36px'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div onclick="notice()">
+						<div id="titles5">
+							<table>
+								<tr>
+									<td>
+										<h4>NOTICE PERIOD</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right' style='font-size:36px'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div onclick="supportcraft()">
+						<div id="titles6">
+							<table>
+								<tr>
+									<td>
+										<h4>SUPPORT CRAFT DETAILS</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right' style='font-size:36px'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 
- 							<tr>
-								<td>Location:</td>
+			<div class="col-md-7">
+				<div class="scrollbar scrollbar-primary">
+					<div id="basic">
+						<table class="table table-responsive-md btn-table">
+							<tr>
+								{% if user.groups.all.0.name == "admin" %}
+								<td>
+									<h6>Location Name:</h6>
+								</td>
 								<td>
 									{{entry.locations.name}}
 								</td>
+								{% endif %}
 							</tr>
 							<tr>
-								<td>STS Position:</td>
 								<td>
-									{{entry.STS_Latitude|floatformat:2}}, {{entry.STS_Longitude|floatformat:2}}
+									<h6>Fendering Position:</h6>
+								</td>
+								<td>
+									{{entry.locations.fendering_position}}
 								</td>
 							</tr>
 							<tr>
-								<td>STS_latitude:</td>
 								<td>
-									{{entry.STS_Latitude|floatformat:2}}
+									<h6>Cargoes permitted:</h6>
 								</td>
-							</tr>
-							<tr>
-								<td>STS_longitude:</td>
-								<td>
-									{{entry.STS_Longitude|floatformat:2}}
-								</td>
-							</tr>
-							<tr>
-								<td>Cargoes permitted:</td>
 								<td>
 									{{entry.locations.Cargos_permitted}}
 								</td>
 							</tr>
-
 							<tr>
-								<td>Type of Operation:</td>
+								<td>
+									<h6>Type of Operation:</h6>
+								</td>
 								<td>
 									{{entry.locations.Type_of_operation}}
 								</td>
 							</tr>
-
 							<tr>
-								<td>Oil Spill Responders:</td>
 								<td>
-									{{entry.emergencycontacts.Oil_Spill_Responders}}
+									<h6>Depth of water:</h6>
+								</td>
+								<td>
+									{{entry.locations.Depth_of_water}}
 								</td>
 							</tr>
-
 							<tr>
-								<td>Primary Fenders:</td>
 								<td>
-									{{entry.equipment_details.Primary_Fenders}}
+									<h6>Approval to conduct STS issued by:</h6>
+								</td>
+								<td>
+									{{entry.locations.Approval_to_conduct_STS_issued_by}}
 								</td>
 							</tr>
-
 							<tr>
-								<td>Agent Company:</td>
 								<td>
-									{{entry.agent_details.Agent_Company}}
+									<h6>Approval needed prior to each STS Operation:</h6>
+								</td>
+								<td>
+									{{entry.locations.Approval_needed_prior_to_each_STS_operation}}
 								</td>
 							</tr>
+							<tr>
+								<td>
+									<h6>Vessel sizes permitted:</h6>
+								</td>
+								<td>
+									{{entry.locations.Vessel_sizes_permitted}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Night time berthing permitted:</h6>
+								</td>
+								<td>
+									{{entry.locations.Night_time_berthing_permitted}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Is local piloting assistance required?</h6>
+								</td>
+								<td>
+									{{entry.locations.Is_local_piloting_assistance_required}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Additional Information about Local Piloting</h6>
+								</td>
+								<td>
+									{{entry.locations.Local_piloting_additional_information}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Are tugs required?</h6>
+								</td>
+								<td>
+									{{entry.locations.Are_tugs_required}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Are tugs required?</h6>
+								</td>
+								<td>
+									{{entry.locations.Are_tugs_required}}
+								</td>
+							</tr>
+						</table>
+
+					</div>
+					<div id="base">
+						<table class="table table-responsive-md btn-table">
 
 							<tr>
-								<td>Base Location:</td>
+								<td>
+									<h6>Base Location:</h6>
+								</td>
 								<td>
 									{{entry.base_details.Base_Location}}
 								</td>
 							</tr>
+							<tr>
+								<td>
+									<h6>Storage Space:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Storage_Space}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Security Arrangements:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Security_Arrangements}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Closest Airport:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Closest_Airport}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Local taxi firms:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Local_taxi_firms}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Accommodation:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Accommodation}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Base facilities:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Base_facilities}}
+								</td>
+							</tr>
+						</table>
+
+					</div>
+					<div id="agent">
+						<table class="table table-responsive-md btn-table">
 
 							<tr>
-								<td>Notice Period:</td>
+								<td>
+									<h6>Agent Company:</h6>
+								</td>
+								<td>
+									{{entry.agent_details.Agent_Company}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Agent Contact:</h6>
+								</td>
+								<td>
+									{{entry.agent_details.Agent_Contact}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Fees to be incurred for STS Operations:</h6>
+								</td>
+								<td>
+									{{entry.agent_details.Fees_to_be_incurred_for_STS_Operations}}
+								</td>
+							</tr>
+						</table>
+
+					</div>
+
+					<div id="equipment">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<h6>Primary Fenders:</h6>
+								</td>
+								<td>
+									{{entry.equipment_details.Primary_Fenders}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Secondary Fenders:</h6>
+								</td>
+								<td>
+									{{entry.equipment_details.Secondary_Fenders}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Fender Moorings:</h6>
+								</td>
+								<td>
+									{{entry.equipment_details.Fender_Moorings}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Rubber Hoses:</h6>
+								</td>
+								<td>
+									{{entry.equipment_details.Rubber_Hoses}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Composite Hoses:</h6>
+								</td>
+								<td>
+									{{entry.equipment_details.Composite_Hoses}}
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="notice">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<h6>Notice Period:</h6>
+								</td>
 								<td>
 									{{entry.notice_period.Notice_Period}}
 								</td>
 							</tr>
+							<tr>
+								<td>
+									<h6>Documentation Requirements:</h6>
+								</td>
+								<td>
+									{{entry.notice_period.Documentation_Requirements}}
+								</td>
+							</tr>
+						</table>
+
+					</div>
+
+					<div id="supportcraft">
+						<table class="table table-responsive-md btn-table">
 
 							<tr>
-								<td>Vessel Name:</td>
+								<td>
+									<h6>Vessel Name:</h6>
+								</td>
 								<td>
 									{{entry.support_craft_details.Vessel_Name}}
 								</td>
 							</tr>
-
 							<tr>
-								<td>Tug Provider Company:</td>
 								<td>
-									{{entry.tug_provider_details.Tug_Provider_Company}}
+									<h6>Support Craft Owner:</h6>
+								</td>
+								<td>
+									{{entry.support_craft_details.Support_Craft_Owner}}
 								</td>
 							</tr>
-
 							<tr>
-								<td>Location under the control of authorities:</td>
 								<td>
-									{{entry.area_details.Location_under_the_control_of_authorities}}
+									<h6>Telephone:</h6>
+								</td>
+								<td>
+									{{entry.support_craft_details.Telephone}}
 								</td>
 							</tr>
+						</table>
 
-							<tr>
-								<td>Local Marine Activity:</td>
-								<td>
-									{{entry.navigational_hazards.Local_marine_activity}}
-								</td>
-							</tr>
+					</div>
 
-							<tr>
-								<td>Prevailing winds:</td>
-								<td>
-									{{entry.met_ocean_conditions.Prevailing_winds}}
-								</td>
-							</tr>
 
-							<tr>
-								<td>Location adjacent to any public sensitive areas:</td>
-								<td>
-									{{entry.environmental_details.Location_adjacent_to_any_public_sensitive_areas}}
-								</td>
-							</tr>
-					</table>
+
 					<hr>
-					{% if entry.Image1 %}
-						<img src="{{entry.Image1.url}}">
-					{% endif %}
-					<br/>
-					{% if entry.Image2 %}
-						<img src="{{entry.Image2.url}}">
-					{% endif %}
-					<br/>
-					{% if entry.Image3 %}
-						<img src="{{entry.Image3.url}}">
-					{% endif %}
-					<br/>
-					{% if entry.Image4 %}
-						<img src="{{entry.Image4.url}}">
-					{% endif %}
-					<br/>
-					{% if entry.Image5 %}
-						<img src="{{entry.Image5.url}}">
-					{% endif %}
 
 
 				</div>
+			</div>
+			<div class="col-md-3">
+
+				<h6>Cargoes permitted:</h6>
+				<p>{{entry.locations.Cargos_permitted}}</p>
+
+				<h6>Type of Operation(s):</h6>
+				<p>{{entry.locations.Type_of_operation}}</p>
+
+				{% include 'accounts/map.html'%}
+
+
 			</div>
 
 		</div>
 
 
 
+<script>
+function basic() {
+  var x1 = document.getElementById("basic");
+  var x2 = document.getElementById("base");
+  var x3 = document.getElementById("agent");
+  var x4 = document.getElementById("equipment");
+  var x5 = document.getElementById("notice");
+  var x6 = document.getElementById("supportcraft");
+
+      x1.style.display = 'none';
+      x2.style.display = 'none';
+      x3.style.display = 'none';
+      x4.style.display = 'none';
+      x5.style.display = 'none';
+      x6.style.display = 'none';
+
+  if (x1.style.display === "none") {
+    x1.style.display = "block";
+    x2.style.display = "none";
+    x3.style.display = "none";
+    x4.style.display = "none";
+    x5.style.display = "none";
+    x6.style.display = "none";
+  } else {
+    x1.style.display = "none";
+  }
+}
+
+function base() {
+  var x1 = document.getElementById("basic");
+  var x2 = document.getElementById("base");
+  var x3 = document.getElementById("agent");
+  var x4 = document.getElementById("equipment");
+  var x5 = document.getElementById("notice");
+  var x6 = document.getElementById("supportcraft");
+
+      x1.style.display = 'none';
+      x2.style.display = 'none';
+      x3.style.display = 'none';
+      x4.style.display = 'none';
+      x5.style.display = 'none';
+      x6.style.display = 'none';
+
+  if (x2.style.display === "none") {
+    x2.style.display = "block";
+    x1.style.display = "none";
+    x3.style.display = "none";
+    x4.style.display = "none";
+    x5.style.display = "none";
+    x6.style.display = "none";
+  } else {
+    x2.style.display = "none";
+  }
+}
+
+function agent() {
+  var x1 = document.getElementById("basic");
+  var x2 = document.getElementById("base");
+  var x3 = document.getElementById("agent");
+  var x4 = document.getElementById("equipment");
+  var x5 = document.getElementById("notice");
+  var x6 = document.getElementById("supportcraft");
+
+      x1.style.display = 'none';
+      x2.style.display = 'none';
+      x3.style.display = 'none';
+      x4.style.display = 'none';
+      x5.style.display = 'none';
+      x6.style.display = 'none';
+
+
+  if (x3.style.display === "none") {
+    x3.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+    x4.style.display = "none";
+    x5.style.display = "none";
+    x6.style.display = "none";
+  } else {
+    x3.style.display = "none";
+  }
+}
+
+function equipment() {
+  var x1 = document.getElementById("basic");
+  var x2 = document.getElementById("base");
+  var x3 = document.getElementById("agent");
+  var x4 = document.getElementById("equipment");
+  var x5 = document.getElementById("notice");
+  var x6 = document.getElementById("supportcraft");
+
+      x1.style.display = 'none';
+      x2.style.display = 'none';
+      x3.style.display = 'none';
+      x4.style.display = 'none';
+      x5.style.display = 'none';
+      x6.style.display = 'none';
+
+  if (x4.style.display === "none") {
+    x4.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+    x3.style.display = "none";
+    x5.style.display = "none";
+    x6.style.display = "none";
+  } else {
+    x4.style.display = "none";
+  }
+}
+
+function notice() {
+  var x1 = document.getElementById("basic");
+  var x2 = document.getElementById("base");
+  var x3 = document.getElementById("agent");
+  var x4 = document.getElementById("equipment");
+  var x5 = document.getElementById("notice");
+  var x6 = document.getElementById("supportcraft");
+
+      x1.style.display = 'none';
+      x2.style.display = 'none';
+      x3.style.display = 'none';
+      x4.style.display = 'none';
+      x5.style.display = 'none';
+      x6.style.display = 'none';
+
+  if (x5.style.display === "none") {
+    x5.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+    x3.style.display = "none";
+    x4.style.display = "none";
+    x6.style.display = "none";
+  } else {
+    x5.style.display = "none";
+  }
+}
+
+function supportcraft() {
+  var x1 = document.getElementById("basic");
+  var x2 = document.getElementById("base");
+  var x3 = document.getElementById("agent");
+  var x4 = document.getElementById("equipment");
+  var x5 = document.getElementById("notice");
+  var x6 = document.getElementById("supportcraft");
+
+      x1.style.display = 'none';
+      x2.style.display = 'none';
+      x3.style.display = 'none';
+      x4.style.display = 'none';
+      x5.style.display = 'none';
+      x6.style.display = 'none';
+
+  if (x6.style.display === "none") {
+    x6.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+    x3.style.display = "none";
+    x4.style.display = "none";
+    x5.style.display = "none";
+  } else {
+    x6.style.display = "none";
+  }
+}
+
+
+$('.titles > div').click(function() {
+  $this = $(this);
+  $this.css('background-color', '#f9b000');
+  $this.siblings().css('background-color', 'transparent');
+})
+</script>
 
 {% endblock %}
