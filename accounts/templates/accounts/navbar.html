@@ -4,32 +4,42 @@
   margin: 10px;
   }
 </style>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      {% if request.user.is_staff %}
-      <center><img src="{% static 'images/WebLogo.png'%}" id="WebLogo"/></center>
-      <p style="text-align:center/left/right;"><li class="nav-item">
+ <nav class="navbar navbar-expand-md navbar-light bg-light" style="background-color: #0065A5 !important;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            {% if request.user.is_staff %}
+      <li class="nav-item active">
         <a class="nav-link" href="{% url 'home' %}">Dashboard</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
+        <a class="nav-link" href="/admin">Admin</a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" href="{% url 'users' %}">Users</a>
       </li>
       {% endif %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'allregions' %}">Regions</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'locations' %}"> All Locations</a>
-      </li></p>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Regions</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="/region/asia">Asia</a></li>
+                    <li><a class="dropdown-item" href="/region/africa">Africa</a></li>
+                    <li><a class="dropdown-item" href="/region/europe">Europe</a></li>
+                    <li><a class="dropdown-item" href="/region/northamerica">North America</a></li>
+                    <li><a class="dropdown-item" href="/region/southamerica">South America</a></li>
+                    <li><a class="dropdown-item" href="/region/australia">Australia</a></li>
+                </ul>
+            </li>
+             <li class="nav-item active">
+              <a class="nav-link" href="{% url 'locations' %}">All Locations</a>
+            </li>
+        </ul>
+    </div>
 
-    </ul>
   </div>
-  <center><img src="{% static 'images/logo.png'%}" id="logo"/></center>
+
   <span class="hello-msg">Hello, {{request.user}}</span>
   <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
-
 </nav>

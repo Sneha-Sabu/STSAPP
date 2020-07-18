@@ -270,19 +270,19 @@ class Entry(models.Model):
         model_form_class=Environmental_DetailsForm
     )
 
-    degrees_latitude = models.FloatField(null=True, blank=True)
+    degrees_latitude = models.IntegerField(null=True, blank=True)
     minutes_latitude = models.IntegerField(null=True, blank=True)
     seconds_latitude = models.IntegerField(null=True, blank=True)
-    degrees_longitude = models.FloatField(null=True, blank=True)
+    degrees_longitude = models.IntegerField(null=True, blank=True)
     minutes_longitude = models.IntegerField(null=True, blank=True)
     seconds_longitude = models.IntegerField(null=True, blank=True)
-    STS_Latitude = models.FloatField(null=True, blank=True)
-    STS_Longitude = models.FloatField(null=True, blank=True)
+    STS_Latitude = models.IntegerField(null=True, blank=True)
+    STS_Longitude = models.IntegerField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        self.STS_Latitude = float(
+        self.STS_Latitude = int(
             self.degrees_latitude + (self.minutes_latitude / 60) + (self.seconds_latitude / 3600))
-        self.STS_Longitude = float(
+        self.STS_Longitude = int(
             self.degrees_longitude + (self.minutes_longitude / 60) + (self.seconds_longitude / 3600))
         super().save(*args, **kwargs)
 
