@@ -308,10 +308,11 @@ class Entry(models.Model):
         return self.locations.name
 
 class BlackList(models.Model):
-    username = models.CharField(max_length=1000, null=True, blank=True)
+    username = models.CharField(max_length=1000)
     flag1 = models.BooleanField(default=False)
     flag2 = models.BooleanField(default=False)
     flag3 = models.BooleanField(default=False)
+    trytologintime = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.username
