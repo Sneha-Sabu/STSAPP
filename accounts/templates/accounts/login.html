@@ -26,19 +26,19 @@
             <br>
             <br>
             <br>
-                <div align="center"> <img border="0" alt="" src="/static/images/ll.png" width="200" height="100"></div>
+                <div align="center"> <img border="0" alt="" src="{% static 'images/ll.png'%}" width="200" height="100"></div>
                 <div class="dowebok ps">
                     <form method="POST" action="" class="mt-4">
                         {% csrf_token %}
                         <div class="input-group my-4">
                             <div class="input-group-prepend">
-                                <label for="formGroupExampleInput" class="d-block mx-auto"><img src="/static/images/user.png" width="20" height="20" class="mt-2"></label>
+                                <label for="formGroupExampleInput" class="d-block mx-auto"><img src="{% static 'images/user.png'%}" width="20" height="20" class="mt-2"></label>
                             </div>
                             <input type="text" class="form-control" name="username" placeholder="Username" aria-label="" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group my-4">
                             <div class="input-group-prepend">
-                                <label for="formGroupExampleInput" class="d-block mx-auto"><img src="/static/images/locker.png" width="20" height="20" class="mt-2"></label>
+                                <label for="formGroupExampleInput" class="d-block mx-auto"><img src="{% static 'images/locker.png'%}" width="20" height="20" class="mt-2"></label>
                             </div>
                             <input type="password" name="password" class="form-control" placeholder="Password" aria-label="" aria-describedby="basic-addon1">
                         </div>
