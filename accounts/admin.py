@@ -80,8 +80,8 @@ class UserHistoryAdmin(SimpleHistoryAdmin):
     history_list_display = ["date_joined", "history_date",]
 
 class BlackListHistoryAdmin(SimpleHistoryAdmin):
-    list_display = ["id","username", "changed_by"]
-    history_list_display = ["region", "changed_by", "history_date",]
+    list_display = ["id","username"]
+    history_list_display = [ "changed_by", "history_date",]
 admin.site.register(BlackList, BlackListHistoryAdmin)
 
 class EntryHistoryAdmin(SimpleHistoryAdmin):
