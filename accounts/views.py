@@ -85,80 +85,6 @@ def createLocations(request):
     return render(request, 'accounts/locations.html', context)
 
 
-def login3(request):
-    if request.method == "POST":
-        username = request.POST.get('username')  # Get username input first
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        BL = BlackList.objects.values_list('username', flat=True)  # Read all data into array
-
-        if username not in BL:  # Check if the username is in blacklist
-            messages.info(request, 'You are not authorized to be on this page. Kindly enter your credentials here to access your account.')
-            return redirect('/login')
-
-        black_list_user = BlackList.objects.get(username=username)
-
-        if black_list_user.flag3 is True:
-            messages.info(request, 'For security reasons, your account has been locked after three incorrect login attempts. Please email the admin at zhangbowen0101@gmail.com to reset your login credentials.')
-        elif black_list_user.flag2 is False:  # Check if the username is in blacklist
-            messages.info(request, 'You are not authorized to be on this page. Kindly enter your credentials here to access your account.')
-            return redirect('/login')
-        else:  # Not in black list username can go to login
-            if user is not None:
-                # black_list_user.flag1 = False
-                # black_list_user.flag2 = False
-                # black_list_user.save()
-                black_list_user.delete()
-                login(request, user)
-                return redirect('home')
-            else:
-                black_list_user.flag3 = True
-                black_list_user.save()
-                messages.info(request, 'For security reasons, your account has been locked after three incorrect login attempts. Please email the admin at zhangbowen0101@gmail.com to reset your login credentials.')
-
-    context = {}
-    return render(request, 'accounts/login3.html', context)
-
-
-def login2(request):
-    if request.method == "POST":
-        username = request.POST.get('username')  # Get username input first
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        BL = BlackList.objects.values_list('username', flat=True)  # Read all data into array
-
-        if username not in BL:  # Check if the username is in blacklist
-            messages.info(request, 'You are not authorized to be on this page. Kindly enter your credentials here to access your account.')
-            return redirect('/login')
-
-        black_list_user = BlackList.objects.get(username=username)
-
-        if black_list_user.flag1 is False:  # Check if the username is in blacklist
-            messages.info(request, 'You are not authorized to be on this page. Kindly enter your credentials here to access your account.')
-            return redirect('/login')
-        elif black_list_user.flag3 is True:
-            messages.info(request, 'For security reasons, your account has been locked after three incorrect login attempts. Please email the admin at zhangbowen0101@gmail.com to reset your login credentials.')
-            return redirect('/login2')
-        elif black_list_user.flag2 is True:
-            messages.info(request, 'You are not authorized to be on this page. Kindly enter your credentials here to access your account.')
-            return redirect('/login3')
-        else:  # Not in black list username can go to login
-            if user is not None:
-                # black_list_user.flag1 = False
-                # black_list_user.save()
-                black_list_user.delete()
-                login(request, user)
-                return redirect('home')
-            else:
-                black_list_user.flag2 = True
-                black_list_user.save()
-                messages.info(request, ' Your username or password is incorrect. The maximum retry attempts allowed for login are 3. Please try again with the correct details for the last attempt or email the admin at zhangbowen0101@gmail.com to reset your credentials.')
-                return redirect('/login3')
-
-    context = {}
-    return render(request, 'accounts/login2.html', context)
-
-
 @unauthenticated_user
 def loginPage(request):
     if request.method == "POST":
@@ -171,12 +97,7 @@ def loginPage(request):
             black_list_user = BlackList.objects.get(username=username)
             usertime = black_list_user.trytologintime
             seconds = time.time() - time.mktime(usertime.timetuple())
-            if seconds > 86400:
-                # black_list_user.flag1 = False
-                # black_list_user.flag2 = False
-                # black_list_user.flag3 = False
-                # black_list_user.save()
-                # If admin want to track the time log, just add code in here
+            if seconds > 86400: # Admin can change cold time for resetting here
                 black_list_user.delete()
 
                 if user is not None:
@@ -186,27 +107,41 @@ def loginPage(request):
                     black_list_user.flag1 = True
                     black_list_user.save()
                     messages.info(request, 'Your username or password is incorrect. Please double-check and try again.')
-                    return redirect('/login2')
+                    return redirect('/login')
 
             elif black_list_user.flag3 is True:
                 messages.info(request, 'For security reasons, your account has been locked after three incorrect login attempts. Please email the admin at zhangbowen0101@gmail.com to reset your login credentials.')
 
             elif black_list_user.flag2 is True:
-                messages.info(request, 'You are not authorized to be on this page. Kindly enter your credentials here to access your account.')
-                return redirect('/login3')
+                if user is not None:
+                    black_list_user.delete()
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    black_list_user.flag3 = True
+                    black_list_user.save()
+                    messages.info(request, 'For security reasons, your account has been locked after three incorrect login attempts. Please email the admin at zhangbowen0101@gmail.com to reset your login credentials.')
+                    return redirect('/login')
             elif black_list_user.flag1 is True and black_list_user.flag2 is False:
-                messages.info(request, 'You are not authorized to be on this page. Kindly enter your credentials here to access your account.')
-                return redirect('/login2')
+                if user is not None:
+                    black_list_user.delete()
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    black_list_user.flag2 = True
+                    black_list_user.save()
+                    messages.info(request, 'Your username or password is incorrect. The maximum retry attempts allowed for login are 3. Please try again with the correct details for the last attempt or email the admin at zhangbowen0101@gmail.com to reset your login credentials.')
+                    return redirect('/login')
             else:
                 if user is not None:
+                    black_list_user.delete()
                     login(request, user)
                     return redirect('home')
                 else:
                     black_list_user.flag1 = True
                     black_list_user.save()
                     messages.info(request, 'Your username or password is incorrect. Please double-check and try again.')
-                    return redirect('/login2')
-
+                    return redirect('/login')
         else:
 
             if user is not None:
@@ -215,7 +150,7 @@ def loginPage(request):
             else:
                 BlackList.objects.create(username=username, flag1=True, flag2=False, flag3=False)
                 messages.info(request, 'Your username or password is incorrect. Please double-check and try again.')
-                return redirect('/login2')
+                return redirect('/login')
 
     context = {}
     return render(request, 'accounts/login.html', context)
