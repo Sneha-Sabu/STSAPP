@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 from djongo import models
 from django import forms
 from multiselectfield import MultiSelectField
+from simple_history.models import HistoricalRecords
+
 
 
 # Create your models here.
@@ -301,6 +303,16 @@ class Entry(models.Model):
     Image4 = models.ImageField(null=True, blank=True)
     Image5 = models.ImageField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    changed_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, default='0', editable=False)
+    history = HistoricalRecords()
+
+    @property
+    def _history_user(self):
+        return self.changed_by
+
+    @_history_user.setter
+    def _history_user(self, value):
+        self.changed_by = value
 
     objects = models.DjongoManager()
 
@@ -313,6 +325,17 @@ class BlackList(models.Model):
     flag2 = models.BooleanField(default=False)
     flag3 = models.BooleanField(default=False)
     trytologintime = models.DateTimeField(auto_now_add=True, null=True)
+
+    changed_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, default='0', editable=False)
+    history = HistoricalRecords()
+
+    @property
+    def _history_user(self):
+        return self.changed_by
+
+    @_history_user.setter
+    def _history_user(self, value):
+        self.changed_by = value
 
     def __str__(self):
         return self.username

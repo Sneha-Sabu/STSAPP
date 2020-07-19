@@ -1,0 +1,302 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+<style>
+
+.row1 {
+	 background:#0065a5;
+	 height: 60px;
+}
+body {
+	 background-color: #ffffff;
+}
+#blacklist, #user {
+	 width: 100%;
+	 padding: 50px 0;
+	 margin-top: 20px;
+	 display: none;
+
+}
+
+div#titles1, #titles2, #titles3, #titles4, #titles5, #titles6 {
+	    padding: 10px 0;
+}
+
+h2 {
+	color: #ffffff;
+	padding: 10px;
+	font-size: 24px;
+}
+
+h4 {
+	color: #ffffff;
+	font-size: 18px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-right: 5px;
+
+}
+
+.col-md-2.left {
+	padding-right: 0px;
+	background-color: #0065a5;
+}
+
+.titles {
+	margin: 10px;
+}
+
+i.fas.fa-angle-right {
+	color: #ffffff;
+	font-size: 28px;
+}
+.scrollbar {
+	height: 500px;
+	background: #fff;
+	overflow-y: scroll;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+	background-color: #0065a5;
+}
+
+.scrollbar-primary {
+	scrollbar-color: #4285F4 #F5F5F5;
+}
+</style>
+
+
+	<div class="row1">
+
+			<div class="col-md-12">
+				<center>
+					<h2>Audit Logs</h2>
+				</center>
+			</div>
+
+	</div>
+
+		<div class="row">
+			<div class="col-md-2 left">
+				<div class="titles">
+					<div onclick="basic()">
+						<div id="titles1">
+							<table>
+								<tr>
+									<td class="col-md-2" style="padding-right: 0px;">
+										<h4>Location Entry Logs</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div onclick="blacklist()">
+						<div id="titles2">
+							<table>
+								<tr>
+									<td class="col-md-2" style="padding-right: 0px;">
+										<h4>Blacklisted User Logs</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right'></i>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+					<div onclick="user()">
+						<div id="titles3">
+							<table>
+								<tr>
+									<td class="col-md-2" style="padding-right: 0px;">
+										<h4>User Logs</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right'></i>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-md-10">
+				<div class="scrollbar scrollbar-primary">
+					<div id="basic">
+						<table class="table table-responsive-md btn-table">
+							<thead>
+								<tr>
+									<th>Location Name</th>
+									<th>Modified on</th>
+									<th>Type of modification</th>
+									<th>Modified by</th>
+									<th>View modifications</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for t in history %}
+								<tr>
+									<td>{{ t.Location_Name }}</td>
+									<td>{{ t.history_date }}</td>
+									<td>{{ t.get_history_type_display }}</td>
+									<td>{{ t.history_user }}</td>
+									<td><a href="/admin/accounts/entry/{{t.id}}/history/{{t.history_id}}/">View</a></td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+
+					</div>
+					<div id="blacklist">
+						<table class="table table-responsive-md btn-table">
+								<thead>
+								<tr>
+									<th>Username</th>
+									<th>Modified on</th>
+									<th>Type of modification</th>
+									<th>Modified by</th>
+									<th>View modifications</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for t in history2 %}
+								<tr>
+									<td>{{ t.username}}</td>
+									<td>{{ t.history_date }}</td>
+									<td>{{ t.get_history_type_display }}</td>
+									<td>{{ t.history_user }}</td>
+
+									<td><a href="/admin/accounts/blacklist/{{t.id}}/history/{{t.history_id}}/">View</a></td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+
+					</div>
+					<div id="user">
+						<table class="table table-responsive-md btn-table">
+								<thead>
+								<tr>
+									<th>Username</th>
+									<th>Modified on</th>
+									<th>Type of modification</th>
+									<th>Modified by</th>
+									<th>View modifications</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for t in history3 %}
+								<tr>
+									<td>{{ t.username}}</td>
+									<td>{{ t.history_date }}</td>
+									<td>{{ t.get_history_type_display }}</td>
+									<td>{{ t.history_user }}</td>
+
+									<td><a href="/admin/auth/user/{{t.id}}/history/">View</a></td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+
+
+					<hr>
+
+
+				</div>
+			</div>
+
+		</div>
+
+
+
+<script>
+function basic() {
+  var x1 = document.getElementById("basic");
+  var x2 = document.getElementById("blacklist");
+  var x3 = document.getElementById("user");
+
+
+      x1.style.display = 'none';
+      x2.style.display = 'none';
+      x3.style.display = 'none';
+
+
+  if (x1.style.display === "none") {
+    x1.style.display = "block";
+    x2.style.display = "none";
+    x3.style.display = "none";
+
+  } else {
+    x1.style.display = "none";
+  }
+}
+
+function blacklist() {
+  var x1 = document.getElementById("basic");
+  var x2 = document.getElementById("blacklist");
+  var x3 = document.getElementById("user");
+
+
+      x1.style.display = 'none';
+      x2.style.display = 'none';
+      x3.style.display = 'none';
+
+
+  if (x2.style.display === "none") {
+    x2.style.display = "block";
+    x1.style.display = "none";
+    x3.style.display = "none";
+
+  } else {
+    x2.style.display = "none";
+  }
+}
+
+function user() {
+  var x1 = document.getElementById("basic");
+  var x2 = document.getElementById("blacklist");
+  var x3 = document.getElementById("user");
+
+
+      x1.style.display = 'none';
+      x2.style.display = 'none';
+      x3.style.display = 'none';
+
+
+  if (x3.style.display === "none") {
+    x3.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+
+  } else {
+    x3.style.display = "none";
+  }
+}
+
+
+
+$('.titles > div').click(function() {
+  $this = $(this);
+  $this.css('background-color', '#ffce1b');
+  $this.siblings().css('background-color', 'transparent');
+})
+</script>
+{% endblock %}

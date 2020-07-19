@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'jquery',
     'accounts',
     'django_filters',
+    'simple_history',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 SESSION_ENGINE = 'user_sessions.backends.db'

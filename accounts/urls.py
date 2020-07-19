@@ -13,5 +13,6 @@ urlpatterns = [
     path('user_profile/', views.userProfile, name="profile"),
     path('region/<str:cats>/', views.Region, name="region"),
     path('allregions/', views.allRegions, name="allregions"),
+    path('auditlogs/', views.AuditLogsView, name="auditlogs"),
 
 ]

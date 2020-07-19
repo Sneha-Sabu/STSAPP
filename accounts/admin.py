@@ -10,6 +10,9 @@ from accounts.forms import EntryForm
 
 # Register your models here.
 from django.conf.urls.static import static
+from simple_history import register
+from simple_history.admin import SimpleHistoryAdmin
+from django.contrib.auth.models import User, Permission, Group
 
 class LogEntryAdmin(admin.ModelAdmin):
     list_display = ('user', 'action_time', 'content_type', 'action_flag','change_message')
@@ -72,5 +75,62 @@ class EntryAdmin(admin.ModelAdmin):
     class Media:
         js = ('//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', 'accounts/js/base.js',)
 
-admin.site.register(Entry, EntryAdmin)
-admin.site.register(BlackList)
+class UserHistoryAdmin(SimpleHistoryAdmin):
+    list_display = ["username", "email"]
+    history_list_display = ["date_joined", "history_date",]
+
+class BlackListHistoryAdmin(SimpleHistoryAdmin):
+    list_display = ["id","username", "changed_by"]
+    history_list_display = ["region", "changed_by", "history_date",]
+admin.site.register(BlackList, BlackListHistoryAdmin)
+
+class EntryHistoryAdmin(SimpleHistoryAdmin):
+    list_display = ["Location_Name","region", "changed_by"]
+    history_list_display = ["region", "changed_by", "history_date",]
+
+    fieldsets = (
+        ('Number of Images', {
+            'fields': (
+            'Location_Name', 'region', 'locations', 'emergencycontacts', 'equipment_details', 'Agent_Company',
+            'agent_details', 'base_details', 'notice_period', 'support_craft_details', 'Provider_company',
+            'tug_provider_details', 'area_details', 'navigational_hazards', 'met_ocean_conditions',
+            'environmental_details', 'degrees_latitude', 'minutes_latitude', 'seconds_latitude', 'degrees_longitude',
+            'minutes_longitude', 'seconds_longitude', 'STS_Latitude', 'STS_Longitude', 'number_of_images'),
+            'classes': ('predefined',)
+        }),
+        (None, {
+            'fields': (('Image1'),),
+            'classes': ('oneimage',)
+        }),
+
+        (None, {
+            'fields': (('Image2'),),
+            'classes': ('twoimages',)
+        }),
+
+        (None, {
+            'fields': (('Image3'),),
+            'classes': ('threeimages',)
+        }),
+
+        (None, {
+            'fields': (('Image4'),),
+            'classes': ('fourimages',)
+        }),
+
+        (None, {
+            'fields': (('Image5'),),
+            'classes': ('fiveimages',)
+        })
+    )
+
+    form = EntryForm
+
+    class Media:
+        js = ('//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', 'accounts/js/base.js',)
+
+
+admin.site.register(Entry, EntryHistoryAdmin)
+admin.site.register(Permission)
+register(User)
+register(Group)

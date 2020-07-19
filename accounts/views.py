@@ -171,6 +171,16 @@ def userProfile(request):
     return render(request, 'accounts/user_profile.html', context)
 
 
+@login_required(login_url='login')
+@admin_only
+def AuditLogsView(request):
+    template_name = "auditlogs.html"
+    history = Entry.history.all()
+    history2 = BlackList.history.all()
+    history3 = User.history.all()
+    history4 = Group.history.all()
+    context = {'history': history, 'history2': history2, 'history3' :history3, 'history4' :history4}
+    return render(request, 'accounts/auditlogs.html', context)
 
 
 
