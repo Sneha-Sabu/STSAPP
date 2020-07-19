@@ -326,16 +326,9 @@ class BlackList(models.Model):
     flag3 = models.BooleanField(default=False)
     trytologintime = models.DateTimeField(auto_now_add=True, null=True)
 
-    changed_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, default='0', editable=False)
     history = HistoricalRecords()
 
-    @property
-    def _history_user(self):
-        return self.changed_by
 
-    @_history_user.setter
-    def _history_user(self, value):
-        self.changed_by = value
 
     def __str__(self):
         return self.username
