@@ -132,5 +132,9 @@ i.fas.fa-angle-right {
 	scrollbar-color: #4285F4 #F5F5F5;
 }
 
-
+.btn-info {
+    color: #fff;
+    background-color: #0065A5 !important;
+    border-color: #0065A5 !important;
+}
 

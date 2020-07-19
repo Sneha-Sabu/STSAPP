@@ -171,7 +171,6 @@ i.fas.fa-angle-right {
 									<th>Username</th>
 									<th>Modified on</th>
 									<th>Type of modification</th>
-									<th>Modified by</th>
 									<th>View modifications</th>
 								</tr>
 							</thead>
@@ -181,8 +180,6 @@ i.fas.fa-angle-right {
 									<td>{{ t.username}}</td>
 									<td>{{ t.history_date }}</td>
 									<td>{{ t.get_history_type_display }}</td>
-									<td>{{ t.history_user }}</td>
-
 									<td><a href="/admin/accounts/blacklist/{{t.id}}/history/{{t.history_id}}/">View</a></td>
 								</tr>
 								{% endfor %}

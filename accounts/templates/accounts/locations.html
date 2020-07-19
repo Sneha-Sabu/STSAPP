@@ -2,25 +2,7 @@
 {% load static %}
 {% block content %}
 
-    <style>
-    .btn-primary {
-            color: #212529;
-            background-color: #f9b000 !important;
-            border-color: #f8f9fa !important;
-        }
-    .btn-info {
-        color: #212529;
-        background-color: #f9b000 !important;
-        border-color: #f8f9fa !important;
-    }
-    label {
-        color: #0065a5;
-    }
 
-    .table td, .table th{
-        border: 1px solid #dee2e6;
-    }
-    </style>
 
     <br>
 
@@ -38,6 +20,8 @@
 					<table class="table">
 						<tr>
 							<th>Location</th>
+							<th>STS Position</th>
+							<th>Types of cargos transferred</th>
 							<th>More details</th>
 
 						</tr>
@@ -46,6 +30,12 @@
 							<tr>
 								<td>
 									{{i.locations.name}}
+								</td>
+								<td>
+									{{i.STS_Latitude}}, {{i.STS_Longitude}}
+								</td>
+								<td>
+									{{i.locations.Cargos_permitted}}
 								</td>
 
 								<td>
