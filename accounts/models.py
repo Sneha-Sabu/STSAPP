@@ -3,6 +3,10 @@ from djongo import models
 from django import forms
 from multiselectfield import MultiSelectField
 from simple_history.models import HistoricalRecords
+from django.utils.translation import gettext_lazy as _
+from django.forms import ModelForm, Textarea
+import datetime
+from django.utils import timezone
 
 
 
@@ -124,85 +128,220 @@ class LocationsForm(forms.ModelForm):
     class Meta:
         model = Locations
         fields = [
-                'name', 'fendering_position', 'Cargos_permitted', 'Type_of_operation', 'Depth_of_water', 'Approval_to_conduct_STS_issued_by', 'Approval_needed_prior_to_each_STS_operation', 'Vessel_sizes_permitted', 'Night_time_berthing_permitted', 'Is_local_piloting_assistance_required', 'Local_piloting_additional_information','Are_tugs_required',
+            'name', 'fendering_position', 'Cargos_permitted',
+            'Type_of_operation', 'Depth_of_water', 'Approval_to_conduct_STS_issued_by',
+            'Approval_needed_prior_to_each_STS_operation', 'Vessel_sizes_permitted', 'Night_time_berthing_permitted',
+            'Is_local_piloting_assistance_required', 'Local_piloting_additional_information', 'Are_tugs_required',
         ]
+
+        help_texts = {
+            'Is_local_piloting_assistance_required': _('Select yes or no'),
+        }
+        widgets = {
+            'fendering_position': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Type_of_operation': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'name': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Depth_of_water': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Approval_to_conduct_STS_issued_by': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Approval_needed_prior_to_each_STS_operation': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Vessel_sizes_permitted': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Night_time_berthing_permitted': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Local_piloting_additional_information': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Are_tugs_required': Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
 
 class EmergencyContactsForm(forms.ModelForm):
     class Meta:
         model = EmergencyContacts
         fields = [
-                'Oil_Spill_Responders', 'Local_Emergency_Medical_Assistance', 'Police', 'Coast_Guard', 'Fire_fighting',
+            'Oil_Spill_Responders', 'Local_Emergency_Medical_Assistance', 'Police', 'Coast_Guard', 'Fire_fighting',
         ]
+
+        widgets = {
+            'Oil_Spill_Responders': Textarea(attrs={'cols': 50, 'rows': 2}),
+            'Local_Emergency_Medical_Assistance': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Police': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Coast_Guard': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Fire_fighting': Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
 
 class Equipment_DetailsForm(forms.ModelForm):
     class Meta:
         model = Equipment_Details
         fields = [
-                'Primary_Fenders', 'Secondary_Fenders', 'Fender_Moorings', 'Rubber_Hoses', 'Composite_Hoses',
+            'Primary_Fenders', 'Secondary_Fenders', 'Fender_Moorings', 'Rubber_Hoses', 'Composite_Hoses',
         ]
+
+        widgets = {
+            'Primary_Fenders': Textarea(attrs={'cols': 50, 'rows': 2}),
+            'Secondary_Fenders': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Fender_Moorings': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Rubber_Hoses': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Composite_Hoses': Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
 
 class Agent_DetailsForm(forms.ModelForm):
     class Meta:
         model = Agent_Details
         fields = [
-                'Agent_Company', 'Agent_Contact', 'Fees_to_be_incurred_for_STS_Operations',
+            'Agent_Company', 'Agent_Contact', 'Fees_to_be_incurred_for_STS_Operations',
         ]
+
+        widgets = {
+            'Agent_Company': Textarea(attrs={'cols': 50, 'rows': 2}),
+            'Agent_Contact': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Fees_to_be_incurred_for_STS_Operations': Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
 
 class Base_DetailsForm(forms.ModelForm):
     class Meta:
         model = Base_Details
         fields = [
-                'Base_Location', 'Storage_Space', 'Security_Arrangements', 'Closest_Airport', 'Local_taxi_firms', 'Accommodation', 'Base_facilities',
+            'Base_Location', 'Storage_Space', 'Security_Arrangements', 'Closest_Airport', 'Local_taxi_firms',
+            'Accommodation', 'Base_facilities',
         ]
+
+        widgets = {
+            'Base_Location': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Storage_Space': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Security_Arrangements': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Closest_Airport': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Local_taxi_firms': Textarea(attrs={'cols': 50, 'rows': 2}),
+            'Accommodation': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Base_facilities': Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
 
 class Notice_PeriodForm(forms.ModelForm):
     class Meta:
         model = Notice_Period
         fields = [
-                'Notice_Period', 'Documentation_Requirements',
+            'Notice_Period', 'Documentation_Requirements',
         ]
+
+        widgets = {
+            'Notice_Period': Textarea(attrs={'cols': 50, 'rows': 2}),
+            'Documentation_Requirements': Textarea(attrs={'cols': 50, 'rows': 5}),
+        }
+
 
 class Support_Craft_DetailsForm(forms.ModelForm):
     class Meta:
         model = Support_Craft_Details
         fields = [
-                'Vessel_Name', 'Support_Craft_Owner', 'Telephone',
+            'Vessel_Name', 'Support_Craft_Owner', 'Telephone',
         ]
+
+        widgets = {
+            'Vessel_Name': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Support_Craft_Owner': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Telephone': Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
 
 class Tug_Provider_DetailsForm(forms.ModelForm):
     class Meta:
         model = Tug_Provider_Details
         fields = [
-                'Tug_Provider_Company', 'Tug_Provider_Contact', 'Tug_Provider_Vessel_Name',
+            'Tug_Provider_Company', 'Tug_Provider_Contact', 'Tug_Provider_Vessel_Name',
         ]
+
+        widgets = {
+            'Tug_Provider_Company': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Tug_Provider_Contact': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Tug_Provider_Vessel_Name': Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
 
 class Area_DetailsForm(forms.ModelForm):
     class Meta:
         model = Area_Details
         fields = [
-                'Location_under_the_control_of_authorities', 'Current_port_security_level', 'What_is_considered_port_limits', 'What_is_considered_international_waters', 'Distance_from_support_base', 'Transit_time_from_shore_to_STS_location', 'Size_of_transfer_area', 'Does_the_area_have_a_large_enough_run_in_area', 'Is_the_transfer_area_sheltered', 'Regulations_to_be_complied_during_the_operation', 'Nature_of_seabed', 'Average_depth_of_water', 'STS_location_suitable_for_anchoring', 'Any_other_service_provider_in_the_same_vicinity',
+            'Location_under_the_control_of_authorities', 'Current_port_security_level',
+            'What_is_considered_port_limits', 'What_is_considered_international_waters', 'Distance_from_support_base',
+            'Transit_time_from_shore_to_STS_location', 'Size_of_transfer_area',
+            'Does_the_area_have_a_large_enough_run_in_area', 'Is_the_transfer_area_sheltered',
+            'Regulations_to_be_complied_during_the_operation', 'Nature_of_seabed', 'Average_depth_of_water',
+            'STS_location_suitable_for_anchoring', 'Any_other_service_provider_in_the_same_vicinity',
         ]
+
+        help_texts = {
+            'What_is_considered_port_limits': _('Provide the complete details'),
+        }
+        widgets = {
+            'Location_under_the_control_of_authorities': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Current_port_security_level': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'What_is_considered_port_limits': Textarea(attrs={'cols': 80, 'rows': 8}),
+            'What_is_considered_international_waters': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Distance_from_support_base': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Transit_time_from_shore_to_STS_location': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Size_of_transfer_area': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Does_the_area_have_a_large_enough_run_in_area': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Is_the_transfer_area_sheltered': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Regulations_to_be_complied_during_the_operation': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Nature_of_seabed': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Average_depth_of_water': Textarea(attrs={'cols': 80, 'rows': 8}),
+            'STS_location_suitable_for_anchoring': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Any_other_service_provider_in_the_same_vicinity': Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
 
 class Navigational_HazardsForm(forms.ModelForm):
     class Meta:
         model = Navigational_Hazards
         fields = [
-                'Local_marine_activity', 'Any_physical_limitations_on_vessel_size', 'Distance_from_land', 'Any_other_navigational_hazards_in_the_area',
+            'Local_marine_activity', 'Any_physical_limitations_on_vessel_size', 'Distance_from_land',
+            'Any_other_navigational_hazards_in_the_area',
         ]
+
+        widgets = {
+            'Local_marine_activity': Textarea(attrs={'cols': 50, 'rows': 2}),
+            'Any_physical_limitations_on_vessel_size': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Distance_from_land': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Any_other_navigational_hazards_in_the_area': Textarea(attrs={'cols': 50, 'rows': 4}),
+        }
+
 
 class Met_Ocean_ConditionsForm(forms.ModelForm):
     class Meta:
         model = Met_Ocean_Conditions
         fields = [
-                'Prevailing_winds', 'Predominant_current', 'Average_wave_height', 'Average_swell_height_and_period', 'What_is_the_tidal_range_if_applicable', 'Location_subject_to_restrictive_Met_conditions', 'STS_Location_covered_by_forecasting_service',
+            'Prevailing_winds', 'Predominant_current', 'Average_wave_height', 'Average_swell_height_and_period',
+            'What_is_the_tidal_range_if_applicable', 'Location_subject_to_restrictive_Met_conditions',
+            'STS_Location_covered_by_forecasting_service',
         ]
+
+        widgets = {
+            'Prevailing_winds': Textarea(attrs={'cols': 50, 'rows': 2}),
+            'Predominant_current': Textarea(attrs={'cols': 50, 'rows': 2}),
+            'Average_wave_height': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Average_swell_height_and_period': Textarea(attrs={'cols': 50, 'rows': 2}),
+            'What_is_the_tidal_range_if_applicable': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Location_subject_to_restrictive_Met_conditions': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'STS_Location_covered_by_forecasting_service': Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
 
 class Environmental_DetailsForm(forms.ModelForm):
     class Meta:
         model = Environmental_Details
         fields = [
-                'Location_adjacent_to_any_public_sensitive_areas', 'Environmental_bodies_to_be_advised_of_operations', 'Local_oil_pollution_prevention_requirements', 'STS_area_covered_by_oil_spill_organisation', 'Contract_directly_with_an_Oil_pollution_contractor',
+            'Location_adjacent_to_any_public_sensitive_areas', 'Environmental_bodies_to_be_advised_of_operations',
+            'Local_oil_pollution_prevention_requirements', 'STS_area_covered_by_oil_spill_organisation',
+            'Contract_directly_with_an_Oil_pollution_contractor',
         ]
+
+        widgets = {
+            'Location_adjacent_to_any_public_sensitive_areas': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Environmental_bodies_to_be_advised_of_operations': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Local_oil_pollution_prevention_requirements': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'STS_area_covered_by_oil_spill_organisation': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Contract_directly_with_an_Oil_pollution_contractor': Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
 
 
 class Entry(models.Model):
@@ -303,6 +442,10 @@ class Entry(models.Model):
     Image4 = models.ImageField(null=True, blank=True)
     Image5 = models.ImageField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.date_created <= now
+
     changed_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, default='0', editable=False)
     history = HistoricalRecords()
 

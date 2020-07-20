@@ -1,0 +1,36 @@
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<fieldset class="module aligned {{ fieldset.classes }}">
+    {% if fieldset.name %}<p>{{ fieldset.name }}</p>{% endif %}
+    {% if fieldset.description %}
+        <div class="description">{{ fieldset.description|safe }}</div>
+    {% endif %}
+    <table class="table table table-bordered table-striped" border=0 width=100%>
+    {% for line in fieldset %}
+        {% cycle '<tr>' '' %}
+        <td width=50%>
+        <div style="border-bottom:0" class="form-row{% if line.errors %} errors{% endif %}{% for field in line %} {{ field.field.name }}{% endfor %}">
+            {{ line.errors }}
+            {% for field in line %}
+                <div{% if not line.fields|length_is:"1" %} class="field-box"{% endif %}>
+                    {% if field.is_checkbox %}
+                        {{ field.field }}{{ field.label_tag }}
+                    {% else %}
+                        {{ field.label_tag }}
+                        {% if field.is_readonly %}
+                            <p>{{ field.contents }}</p>
+                        {% else %}
+                            {{ field.field }}
+                        {% endif %}
+                    {% endif %}
+                    {% if field.field.field.help_text %}
+                        <p class="help">{{ field.field.field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        </td>
+        {% cycle '' '</tr>' %}
+    {% endfor %}
+    </table>
+</fieldset>
