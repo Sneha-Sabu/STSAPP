@@ -130,7 +130,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     # ...
-    ("admin", "/static/css"),
+    ("admin", "/static/admin/css"),
 ]
 
 MEDIA_URL = '/images/'
