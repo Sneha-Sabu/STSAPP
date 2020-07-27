@@ -216,7 +216,7 @@ class Download_auditlogsPDF(View):
         pdf = render_to_pdf('accounts/pdf_auditlogs.html', context)
         response = HttpResponse(pdf, content_type='application/pdf')
         filename = "auditlogs.pdf"
-        content = "attachment; filename='%s'" % (filename)
+        content = "attachment; filename=%s" % (filename)
         response['Content-Disposition'] = content
         return response
 
