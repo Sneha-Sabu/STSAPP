@@ -22,8 +22,8 @@ class LoginFunctionalTest(unittest.TestCase):
         self.browser.quit()
 
     def test_login_page(self):
-        self.browser.get('http://127.0.0.1:8000/login/')
-        assert 'Login page' in self.browser.title
+        self.browser.get('https://sts-app.azurewebsites.net/login/')
+        assert 'Login' in self.browser.title
         self.browser.implicitly_wait(10)
 
 
@@ -158,13 +158,13 @@ class SeleniumTestCase(LiveServerTestCase):
         driver = webdriver.Chrome(executable_path=r'C:\\Users\\snesh\\webdriver\\chromedriver.exe')
         driver.maximize_window()
         # Login form
-        driver.get('http://127.0.0.1:8000/login/')
+        driver.get('https://sts-app.azurewebsites.net/login/')
         username = driver.find_element_by_name('username')
         password = driver.find_element_by_name('password')
         submit = driver.find_element_by_tag_name('button')
         # Enter credentials on the login form
         username.send_keys('admin')
-        password.send_keys('123')
+        password.send_keys('stsjf2020')
         submit.send_keys(Keys.RETURN)
         time.sleep(5)
 
@@ -228,7 +228,7 @@ class SeleniumPasswordLockoutTestCase(LiveServerTestCase):
         driver = webdriver.Chrome(executable_path=r'C:\\Users\\snesh\\webdriver\\chromedriver.exe')
         driver.maximize_window()
         # Login form
-        driver.get('http://127.0.0.1:8000/login/')
+        driver.get('https://sts-app.azurewebsites.net/login/')
         username = driver.find_element_by_name('username')
         password = driver.find_element_by_name('password')
         submit = driver.find_element_by_tag_name('button')
