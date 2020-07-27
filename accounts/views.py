@@ -11,6 +11,12 @@ from django.contrib.auth.models import User
 import time
 from django.contrib import messages
 from .decorators import unauthenticated_user, allowed_users, admin_only
+from django.shortcuts import render
+from io import BytesIO
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.views import View
+from xhtml2pdf import pisa
 
 
 # Create your views here.
@@ -93,11 +99,18 @@ def loginPage(request):
         user = authenticate(request, username=username, password=password)
         BL = BlackList.objects.values_list('username', flat=True)  # Read all data into array
 
+        usercheck = User.objects.values_list('username', flat=True)
+
+        if username not in usercheck:
+            messages.info(request,
+                          'Username does not exist. Contact admin zhangbowen0101@gmail.com to create your account.')
+            return redirect('/login')
+
         if username in BL:  # Check if the username is in blacklist
             black_list_user = BlackList.objects.get(username=username)
             usertime = black_list_user.trytologintime
             seconds = time.time() - time.mktime(usertime.timetuple())
-            if seconds > 86400: # Admin can change cold time for resetting here
+            if seconds > 21600: # Admin can change cold time for resetting here
                 black_list_user.delete()
 
                 if user is not None:
@@ -182,6 +195,40 @@ def AuditLogsView(request):
     context = {'history': history, 'history2': history2, 'history3' :history3, 'history4' :history4}
     return render(request, 'accounts/auditlogs.html', context)
 
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
 
+
+class Download_auditlogsPDF(View):
+    def get(self, request, *args, **kwargs):
+        history1 = Entry.history.all()
+        history2 = BlackList.history.all()
+        history3 = User.history.all()
+        history4 = Group.history.all()
+        context = {'history1': history1, 'history2': history2, 'history3': history3, 'history4': history4}
+
+        pdf = render_to_pdf('accounts/pdf_auditlogs.html', context)
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "auditlogs.pdf"
+        content = "attachment; filename='%s'" % (filename)
+        response['Content-Disposition'] = content
+        return response
+
+class DownloadviewlocationsPDF(View):
+    def get(self, request, pk, *args, **kwargs):
+        entry = Entry.objects.get(id=pk)
+        context = {'entry': entry}
+        pdf = render_to_pdf('accounts/pdf_viewlocations.html',context)
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "location.pdf"
+        content = "attachment; filename=%s" % (filename)
+        response['Content-Disposition'] = content
+        return response
 
 

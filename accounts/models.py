@@ -12,11 +12,11 @@ from django.utils import timezone
 
 # Create your models here.
 
-Cargoes_Permitted = ((1, 'Oil'),
-                     (2, 'LPG'),
-                     (3, 'Chemicals'),
-                     (4, 'LNG'),
-                     (5, 'All cargoes permitted'))
+Cargoes_Permitted = (('Oil', 'Oil'),
+                     ('LPG', 'LPG'),
+                     ('Chemicals', 'Chemicals'),
+                     ('LNG', 'LNG'),
+                     ('All cargoes permitted', 'All cargoes permitted'))
 
 
 class Locations(models.Model):
@@ -60,7 +60,7 @@ class Equipment_Details(models.Model):
 class Agent_Details(models.Model):
     Agent_Company = models.CharField(max_length=1000, null=True, blank=True)
     Agent_Contact = models.CharField(max_length=1000, null=True, blank=True)
-    Fees_to_be_incurred_for_STS_Operations = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
+    Fees_to_be_incurred_for_STS_Operations = models.CharField(max_length=1000, null=True, blank=True)
 
 class Base_Details(models.Model):
     Base_Location = models.CharField(max_length=1000, null=True, blank=True)

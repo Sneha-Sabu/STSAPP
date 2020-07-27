@@ -1,0 +1,707 @@
+<head>
+
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content">
+    	<h1><center>STS LOCATION DETAILS PDF</center></h1>
+    </div>
+
+
+    <!-- HTML Content -->
+
+    <hr>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+				<div class="scrollbar scrollbar-primary">
+					<div id="basic">
+						<table class="table table-responsive-md btn-table">
+							<tr>
+								<td>
+									<h3>BASIC DETAILS</h3>
+									<h6>Location Name:</h6>
+								</td>
+								<td>
+									{{entry.locations.name}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Fendering Position:</h6>
+								</td>
+								<td>
+									{{entry.locations.fendering_position}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Cargoes permitted:</h6>
+								</td>
+								<td>
+									{{entry.locations.Cargos_permitted}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Type of Operation:</h6>
+								</td>
+								<td>
+									{{entry.locations.Type_of_operation}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Depth of water:</h6>
+								</td>
+								<td>
+									{{entry.locations.Depth_of_water}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Approval to conduct STS issued by:</h6>
+								</td>
+								<td>
+									{{entry.locations.Approval_to_conduct_STS_issued_by}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Approval needed prior to each STS Operation:</h6>
+								</td>
+								<td>
+									{{entry.locations.Approval_needed_prior_to_each_STS_operation}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Vessel sizes permitted:</h6>
+								</td>
+								<td>
+									{{entry.locations.Vessel_sizes_permitted}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Night time berthing permitted:</h6>
+								</td>
+								<td>
+									{{entry.locations.Night_time_berthing_permitted}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Is local piloting assistance required?</h6>
+								</td>
+								<td>
+									{{entry.locations.Is_local_piloting_assistance_required}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Additional Information about Local Piloting</h6>
+								</td>
+								<td>
+									{{entry.locations.Local_piloting_additional_information}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Are tugs required?</h6>
+								</td>
+								<td>
+									{{entry.locations.Are_tugs_required}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Are tugs required?</h6>
+								</td>
+								<td>
+									{{entry.locations.Are_tugs_required}}
+								</td>
+							</tr>
+						</table>
+					</div>
+					<hr>
+					<div id="base">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<br>
+									<h3>BASE DETAILS</h3>
+									<h6>Base Location:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Base_Location}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Storage Space:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Storage_Space}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Security Arrangements:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Security_Arrangements}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Closest Airport:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Closest_Airport}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Local taxi firms:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Local_taxi_firms}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Accommodation:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Accommodation}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Base facilities:</h6>
+								</td>
+								<td>
+									{{entry.base_details.Base_facilities}}
+								</td>
+							</tr>
+						</table>
+
+					</div>
+					<hr>
+					<div id="agent">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<br>
+									<h3>AGENT DETAILS</h3>
+									<h6>Agent Company:</h6>
+								</td>
+								<td>
+									{{entry.agent_details.Agent_Company}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Agent Contact:</h6>
+								</td>
+								<td>
+									{{entry.agent_details.Agent_Contact}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Fees to be incurred for STS Operations:</h6>
+								</td>
+								<td>
+									{{entry.agent_details.Fees_to_be_incurred_for_STS_Operations}}
+								</td>
+							</tr>
+						</table>
+
+					</div>
+					<hr>
+					<div id="equipment">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<br>
+									<h3>EQUIPMENT DETAILS</h3>
+									<h6>Primary Fenders:</h6>
+								</td>
+								<td>
+									{{entry.equipment_details.Primary_Fenders}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Secondary Fenders:</h6>
+								</td>
+								<td>
+									{{entry.equipment_details.Secondary_Fenders}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Fender Moorings:</h6>
+								</td>
+								<td>
+									{{entry.equipment_details.Fender_Moorings}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Rubber Hoses:</h6>
+								</td>
+								<td>
+									{{entry.equipment_details.Rubber_Hoses}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Composite Hoses:</h6>
+								</td>
+								<td>
+									{{entry.equipment_details.Composite_Hoses}}
+								</td>
+							</tr>
+						</table>
+					</div>
+					<hr>
+					<div id="notice">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<br>
+									<h3>NOTICE PERIOD:</h3>
+									<h6>Notice Period:</h6>
+								</td>
+								<td>
+									{{entry.notice_period.Notice_Period}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Documentation Requirements:</h6>
+								</td>
+								<td>
+									{{entry.notice_period.Documentation_Requirements}}
+								</td>
+							</tr>
+						</table>
+
+					</div>
+					<hr>
+					<div id="supportcraft">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<br>
+									<h3>SUPPORT CRAFT DETAILS</h3>
+									<h6>Vessel Name:</h6>
+								</td>
+								<td>
+									{{entry.support_craft_details.Vessel_Name}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Support Craft Owner:</h6>
+								</td>
+								<td>
+									{{entry.support_craft_details.Support_Craft_Owner}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Telephone:</h6>
+								</td>
+								<td>
+									{{entry.support_craft_details.Telephone}}
+								</td>
+							</tr>
+						</table>
+
+					</div>
+					<hr>
+					<div id="emergency_contacts">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<br>
+									<h3>EMERGENCY CONTACTS</h3>
+									<h6>Oil Spill Responders:</h6>
+								</td>
+								<td>
+									{{entry.emergencycontacts.Oil_Spill_Responders}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Local Emergency Medical Assistance:</h6>
+								</td>
+								<td>
+									{{entry.emergencycontacts.Local_Emergency_Medical_Assistance}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Police:</h6>
+								</td>
+								<td>
+									{{entry.emergencycontacts.Police}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Coast Guard:</h6>
+								</td>
+								<td>
+									{{entry.emergencycontacts.Coast_Guard}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Local Emergency Medical Assistance:</h6>
+								</td>
+								<td>
+									{{entry.emergencycontacts.Fire_fighting}}
+								</td>
+							</tr>
+						</table>
+					</div>
+					<hr>
+					<div id="tug_provider">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<br>
+									<h3>TUG PROVIDER DETAILS</h3>
+									<h6>Tug Provider Company:</h6>
+								</td>
+								<td>
+									{{entry.tug_provider_details.Tug_Provider_Company}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Tug Provider Contact:</h6>
+								</td>
+								<td>
+									{{entry.tug_provider_details.Tug_Provider_Contact}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Tug Provider Vessel Name:</h6>
+								</td>
+								<td>
+									{{entry.tug_provider_details.Tug_Provider_Vessel_Name}}
+								</td>
+							</tr>
+						</table>
+					</div>
+					<hr>
+					<div id="area_details">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<br>
+									<h3>AREA DETAILS</h3>
+									<h6>Location under the control of authorities:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Location_under_the_control_of_authorities}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Current port security level:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Current_port_security_level}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Port Limits:</h6>
+								</td>
+								<td>
+									{{entry.area_details.What_is_considered_port_limits}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>International waters:</h6>
+								</td>
+								<td>
+									{{entry.area_details.What_is_considered_international_waters}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Distance from support base:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Distance_from_support_base}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Transit time from shore to STS location:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Transit_time_from_shore_to_STS_location}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Size of transfer area:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Size_of_transfer_area}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Does the area have a large enough run in area:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Does_the_area_have_a_large_enough_run_in_area}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Is the transfer area sheltered:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Is_the_transfer_area_sheltered}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Regulations to be complied during the operation:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Regulations_to_be_complied_during_the_operation}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Nature of seabed:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Nature_of_seabed}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Average_depth_of_water:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Average_depth_of_water}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Is STS location suitable for anchoring:</h6>
+								</td>
+								<td>
+									{{entry.area_details.STS_location_suitable_for_anchoring}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Any other service provider in the same vicinity:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Any_other_service_provider_in_the_same_vicinity}}
+								</td>
+							</tr>
+						</table>
+					</div>
+					<hr>
+					<div id="navigational_hazards">
+						<table class="table table-responsive-md btn-table">
+							<tr>
+								<td>
+									<br>
+									<h3>NAVIGATIONAL HAZARDS</h3>
+									<h6>Local marine activity:</h6>
+								</td>
+								<td>
+									{{entry.navigational_hazards.Local_marine_activity}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Any physical limitations on vessel size:</h6>
+								</td>
+								<td>
+									{{entry.navigational_hazards.Any_physical_limitations_on_vessel_size}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Distance from land:</h6>
+								</td>
+								<td>
+									{{entry.navigational_hazards.Distance_from_land}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Any other navigational hazards in the area:</h6>
+								</td>
+								<td>
+									{{entry.navigational_hazards.Any_other_navigational_hazards_in_the_area}}
+								</td>
+							</tr>
+
+						</table>
+					</div>
+					<hr>
+					<div id="ocean_conditions">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<br>
+									<h3>MET OCEAN CONDITIONS</h3>
+									<h6>Prevailing winds if any:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.Prevailing_winds}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Predominant current:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.Predominant_current}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Average wave height:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.Average_wave_height}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Average swell height and period:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.Average_swell_height_and_period}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>What is the tidal range if applicable:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.What_is_the_tidal_range_if_applicable}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Location subject to restrictive Met conditions:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.Location_subject_to_restrictive_Met_conditions}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>STS Location covered by forecasting service:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.STS_Location_covered_by_forecasting_service}}
+								</td>
+							</tr>
+						</table>
+					</div>
+					<hr>
+
+					<div id="environmental_details">
+						<table class="table table-responsive-md btn-table">
+							<tr>
+								<td>
+									<br>
+									<h3>ENVIRONMENTAL DETAILS</h3>
+									<h6>Location adjacent to any public sensitive areas:</h6>
+								</td>
+								<td>
+									{{entry.environmental_details.Location_adjacent_to_any_public_sensitive_areas}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Environmental bodies to be advised of operations:</h6>
+								</td>
+								<td>
+									{{entry.environmental_details.Environmental_bodies_to_be_advised_of_operations}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Local oil pollution prevention requirements:</h6>
+								</td>
+								<td>
+									{{entry.environmental_details.Local_oil_pollution_prevention_requirements}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>STS_area_covered_by_oil_spill_organisation:</h6>
+								</td>
+								<td>
+									{{entry.environmental_details.STS_area_covered_by_oil_spill_organisation}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Contract directly with an Oil pollution contractor:</h6>
+								</td>
+								<td>
+									{{entry.environmental_details.Contract_directly_with_an_Oil_pollution_contractor}}
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<hr>
+
+				</div>
+			</div>
+
+
+</body>
+</html>

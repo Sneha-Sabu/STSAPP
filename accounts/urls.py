@@ -14,5 +14,7 @@ urlpatterns = [
     path('region/<str:cats>/', views.Region, name="region"),
     path('allregions/', views.allRegions, name="allregions"),
     path('auditlogs/', views.AuditLogsView, name="auditlogs"),
+    path('pdf_auditlogs/', views.Download_auditlogsPDF.as_view(), name="pdf_auditlogs"),
+    path('pdf_viewlocations/<str:pk>/', views.DownloadviewlocationsPDF.as_view(), name="pdf_viewlocations"),
 
 ]

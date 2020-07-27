@@ -1,16 +1,27 @@
 {% extends 'accounts/main.html' %}
 {% block content %}
 {% load static %}
+<style>
+	.btn-secondary {
+		color: #212529;
+		background-color: #ffc107 !important;
+		border-color: rgba(0,0,0,.1) !important;
+		font-size: 18px;
+		font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+		font-weight: 400;
+		line-height: 1.5;
+	}
+	</style>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
 
 		<div class="row1">
 			<div class="col-md-2 left">
 			</div>
 			<div class="col-md-7">
 				<center>
-					<h2>Information on {{entry.locations.name}}</h2>
+					<h2>Information on {{entry.locations.name}} <a class="btn btn-secondary pull-right" href="{% url 'pdf_viewlocations' entry.id  %}">Generate PDF</a></h2>
 				</center>
 			</div>
 			<div class="col-md-3">
@@ -105,6 +116,96 @@
 							</table>
 						</div>
 					</div>
+
+					<div onclick="emergency_contacts()">
+						<div id="titles7">
+							<table>
+								<tr>
+									<td class="col-md-2" style="padding-right: 0px;">
+										<h4>Emergency Contact Details</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+					<div onclick="tug_provider()">
+						<div id="titles8">
+							<table>
+								<tr>
+									<td class="col-md-2" style="padding-right: 0px;">
+										<h4>Tug Provider Details</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+					<div onclick="area_details()">
+						<div id="titles9">
+							<table>
+								<tr>
+									<td class="col-md-2" style="padding-right: 0px;">
+										<h4>Area Details</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+					<div onclick="navigational_hazards()">
+						<div id="titles10">
+							<table>
+								<tr>
+									<td class="col-md-2" style="padding-right: 0px;">
+										<h4>Navigational Hazards</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div onclick="ocean_conditions()">
+						<div id="titles11">
+							<table>
+								<tr>
+									<td class="col-md-2" style="padding-right: 0px;">
+										<h4>Met Ocean Conditions</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div onclick="environmental_details()">
+						<div id="titles12">
+							<table>
+								<tr>
+									<td class="col-md-2" style="padding-right: 0px;">
+										<h4>Environmental Details</h4>
+									</td>
+									<td>
+										<i class='fas fa-angle-right'></i>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+
 				</div>
 			</div>
 
@@ -200,14 +301,6 @@
 								</td>
 								<td>
 									{{entry.locations.Local_piloting_additional_information}}
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h6>Are tugs required?</h6>
-								</td>
-								<td>
-									{{entry.locations.Are_tugs_required}}
 								</td>
 							</tr>
 							<tr>
@@ -414,6 +507,361 @@
 					</div>
 
 
+					<div id="emergency_contacts">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<h6>Oil Spill Responders:</h6>
+								</td>
+								<td>
+									{{entry.emergencycontacts.Oil_Spill_Responders}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Local Emergency Medical Assistance:</h6>
+								</td>
+								<td>
+									{{entry.emergencycontacts.Local_Emergency_Medical_Assistance}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Police:</h6>
+								</td>
+								<td>
+									{{entry.emergencycontacts.Police}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Coast Guard:</h6>
+								</td>
+								<td>
+									{{entry.emergencycontacts.Coast_Guard}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Local Emergency Medical Assistance:</h6>
+								</td>
+								<td>
+									{{entry.emergencycontacts.Fire_fighting}}
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div id="tug_provider">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<h6>Tug Provider Company:</h6>
+								</td>
+								<td>
+									{{entry.tug_provider_details.Tug_Provider_Company}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Tug Provider Contact:</h6>
+								</td>
+								<td>
+									{{entry.tug_provider_details.Tug_Provider_Contact}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Tug Provider Vessel Name:</h6>
+								</td>
+								<td>
+									{{entry.tug_provider_details.Tug_Provider_Vessel_Name}}
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div id="area_details">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<h6>Location under the control of authorities:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Location_under_the_control_of_authorities}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Current port security level:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Current_port_security_level}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Port Limits:</h6>
+								</td>
+								<td>
+									{{entry.area_details.What_is_considered_port_limits}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>International waters:</h6>
+								</td>
+								<td>
+									{{entry.area_details.What_is_considered_international_waters}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Distance from support base:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Distance_from_support_base}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Transit time from shore to STS location:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Transit_time_from_shore_to_STS_location}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Size of transfer area:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Size_of_transfer_area}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Does the area have a large enough run in area:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Does_the_area_have_a_large_enough_run_in_area}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Is the transfer area sheltered:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Is_the_transfer_area_sheltered}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Regulations to be complied during the operation:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Regulations_to_be_complied_during_the_operation}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Nature of seabed:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Nature_of_seabed}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Average_depth_of_water:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Average_depth_of_water}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Is STS location suitable for anchoring:</h6>
+								</td>
+								<td>
+									{{entry.area_details.STS_location_suitable_for_anchoring}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Any other service provider in the same vicinity:</h6>
+								</td>
+								<td>
+									{{entry.area_details.Any_other_service_provider_in_the_same_vicinity}}
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div id="navigational_hazards">
+						<table class="table table-responsive-md btn-table">
+							<tr>
+								<td>
+									<h6>Local marine activity:</h6>
+								</td>
+								<td>
+									{{entry.navigational_hazards.Local_marine_activity}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Any physical limitations on vessel size:</h6>
+								</td>
+								<td>
+									{{entry.navigational_hazards.Any_physical_limitations_on_vessel_size}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Distance from land:</h6>
+								</td>
+								<td>
+									{{entry.navigational_hazards.Distance_from_land}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Any other navigational hazards in the area:</h6>
+								</td>
+								<td>
+									{{entry.navigational_hazards.Any_other_navigational_hazards_in_the_area}}
+								</td>
+							</tr>
+
+						</table>
+					</div>
+
+					<div id="ocean_conditions">
+						<table class="table table-responsive-md btn-table">
+
+							<tr>
+								<td>
+									<h6>Prevailing winds if any:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.Prevailing_winds}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Predominant current:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.Predominant_current}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Average wave height:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.Average_wave_height}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Average swell height and period:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.Average_swell_height_and_period}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>What is the tidal range if applicable:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.What_is_the_tidal_range_if_applicable}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Location subject to restrictive Met conditions:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.Location_subject_to_restrictive_Met_conditions}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>STS Location covered by forecasting service:</h6>
+								</td>
+								<td>
+									{{entry.met_ocean_conditions.STS_Location_covered_by_forecasting_service}}
+								</td>
+							</tr>
+						</table>
+					</div>
+					<hr>
+
+					<div id="environmental_details">
+						<table class="table table-responsive-md btn-table">
+							<tr>
+								<td>
+									<h6>Location adjacent to any public sensitive areas:</h6>
+								</td>
+								<td>
+									{{entry.environmental_details.Location_adjacent_to_any_public_sensitive_areas}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Environmental bodies to be advised of operations:</h6>
+								</td>
+								<td>
+									{{entry.environmental_details.Environmental_bodies_to_be_advised_of_operations}}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h6>Local oil pollution prevention requirements:</h6>
+								</td>
+								<td>
+									{{entry.environmental_details.Local_oil_pollution_prevention_requirements}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>STS_area_covered_by_oil_spill_organisation:</h6>
+								</td>
+								<td>
+									{{entry.environmental_details.STS_area_covered_by_oil_spill_organisation}}
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<h6>Contract directly with an Oil pollution contractor:</h6>
+								</td>
+								<td>
+									{{entry.environmental_details.Contract_directly_with_an_Oil_pollution_contractor}}
+								</td>
+							</tr>
+						</table>
+					</div>
+
 
 					<hr>
 
@@ -430,7 +878,6 @@
 
 				{% include 'accounts/map.html'%}
 
-
 			</div>
 
 		</div>
@@ -439,46 +886,77 @@
 
 <script>
 function basic() {
-  var x1 = document.getElementById("basic");
-  var x2 = document.getElementById("base");
-  var x3 = document.getElementById("agent");
-  var x4 = document.getElementById("equipment");
-  var x5 = document.getElementById("notice");
-  var x6 = document.getElementById("supportcraft");
+	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
 
-      x1.style.display = 'none';
-      x2.style.display = 'none';
-      x3.style.display = 'none';
-      x4.style.display = 'none';
-      x5.style.display = 'none';
-      x6.style.display = 'none';
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
 
   if (x1.style.display === "none") {
-    x1.style.display = "block";
+  	x1.style.display = "block";
     x2.style.display = "none";
     x3.style.display = "none";
     x4.style.display = "none";
     x5.style.display = "none";
     x6.style.display = "none";
+    x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
   } else {
     x1.style.display = "none";
   }
 }
 
 function base() {
-  var x1 = document.getElementById("basic");
-  var x2 = document.getElementById("base");
-  var x3 = document.getElementById("agent");
-  var x4 = document.getElementById("equipment");
-  var x5 = document.getElementById("notice");
-  var x6 = document.getElementById("supportcraft");
+	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
 
-      x1.style.display = 'none';
-      x2.style.display = 'none';
-      x3.style.display = 'none';
-      x4.style.display = 'none';
-      x5.style.display = 'none';
-      x6.style.display = 'none';
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
 
   if (x2.style.display === "none") {
     x2.style.display = "block";
@@ -487,25 +965,44 @@ function base() {
     x4.style.display = "none";
     x5.style.display = "none";
     x6.style.display = "none";
+    x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
   } else {
     x2.style.display = "none";
   }
 }
 
 function agent() {
-  var x1 = document.getElementById("basic");
-  var x2 = document.getElementById("base");
-  var x3 = document.getElementById("agent");
-  var x4 = document.getElementById("equipment");
-  var x5 = document.getElementById("notice");
-  var x6 = document.getElementById("supportcraft");
+	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
 
-      x1.style.display = 'none';
-      x2.style.display = 'none';
-      x3.style.display = 'none';
-      x4.style.display = 'none';
-      x5.style.display = 'none';
-      x6.style.display = 'none';
+
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
 
 
   if (x3.style.display === "none") {
@@ -515,25 +1012,43 @@ function agent() {
     x4.style.display = "none";
     x5.style.display = "none";
     x6.style.display = "none";
+    x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
   } else {
     x3.style.display = "none";
   }
 }
 
 function equipment() {
-  var x1 = document.getElementById("basic");
-  var x2 = document.getElementById("base");
-  var x3 = document.getElementById("agent");
-  var x4 = document.getElementById("equipment");
-  var x5 = document.getElementById("notice");
-  var x6 = document.getElementById("supportcraft");
+  	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
 
-      x1.style.display = 'none';
-      x2.style.display = 'none';
-      x3.style.display = 'none';
-      x4.style.display = 'none';
-      x5.style.display = 'none';
-      x6.style.display = 'none';
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
 
   if (x4.style.display === "none") {
     x4.style.display = "block";
@@ -542,25 +1057,43 @@ function equipment() {
     x3.style.display = "none";
     x5.style.display = "none";
     x6.style.display = "none";
+    x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
   } else {
     x4.style.display = "none";
   }
 }
 
 function notice() {
-  var x1 = document.getElementById("basic");
-  var x2 = document.getElementById("base");
-  var x3 = document.getElementById("agent");
-  var x4 = document.getElementById("equipment");
-  var x5 = document.getElementById("notice");
-  var x6 = document.getElementById("supportcraft");
+  	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
 
-      x1.style.display = 'none';
-      x2.style.display = 'none';
-      x3.style.display = 'none';
-      x4.style.display = 'none';
-      x5.style.display = 'none';
-      x6.style.display = 'none';
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
 
   if (x5.style.display === "none") {
     x5.style.display = "block";
@@ -569,25 +1102,43 @@ function notice() {
     x3.style.display = "none";
     x4.style.display = "none";
     x6.style.display = "none";
+    x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
   } else {
     x5.style.display = "none";
   }
 }
 
 function supportcraft() {
-  var x1 = document.getElementById("basic");
-  var x2 = document.getElementById("base");
-  var x3 = document.getElementById("agent");
-  var x4 = document.getElementById("equipment");
-  var x5 = document.getElementById("notice");
-  var x6 = document.getElementById("supportcraft");
+  	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
 
-      x1.style.display = 'none';
-      x2.style.display = 'none';
-      x3.style.display = 'none';
-      x4.style.display = 'none';
-      x5.style.display = 'none';
-      x6.style.display = 'none';
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
 
   if (x6.style.display === "none") {
     x6.style.display = "block";
@@ -596,8 +1147,284 @@ function supportcraft() {
     x3.style.display = "none";
     x4.style.display = "none";
     x5.style.display = "none";
+    x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
   } else {
     x6.style.display = "none";
+  }
+}
+
+function emergency_contacts() {
+	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
+
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
+
+	if (x7.style.display === "none") {
+    x7.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+    x3.style.display = "none";
+    x4.style.display = "none";
+    x5.style.display = "none";
+    x6.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
+  } else {
+    x7.style.display = "none";
+  }
+}
+
+function tug_provider() {
+	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
+
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
+
+	if (x8.style.display === "none") {
+    x8.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+    x3.style.display = "none";
+    x4.style.display = "none";
+    x5.style.display = "none";
+    x6.style.display = 'none';
+	x7.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
+  } else {
+    x8.style.display = "none";
+  }
+}
+
+function area_details() {
+	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
+
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
+
+	if (x9.style.display === "none") {
+    x9.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+    x3.style.display = "none";
+    x4.style.display = "none";
+    x5.style.display = "none";
+    x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
+  } else {
+    x9.style.display = "none";
+  }
+}
+
+function navigational_hazards() {
+	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
+
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
+
+	if (x10.style.display === "none") {
+    x10.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+    x3.style.display = "none";
+    x4.style.display = "none";
+    x5.style.display = "none";
+    x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
+  } else {
+    x10.style.display = "none";
+  }
+}
+
+function ocean_conditions() {
+	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
+
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
+
+	if (x11.style.display === "none") {
+    x11.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+    x3.style.display = "none";
+    x4.style.display = "none";
+    x5.style.display = "none";
+    x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x12.style.display = 'none';
+  } else {
+    x11.style.display = "none";
+  }
+}
+
+function environmental_details() {
+	var x1 = document.getElementById("basic");
+  	var x2 = document.getElementById("base");
+  	var x3 = document.getElementById("agent");
+  	var x4 = document.getElementById("equipment");
+  	var x5 = document.getElementById("notice");
+  	var x6 = document.getElementById("supportcraft");
+  	var x7 = document.getElementById("emergency_contacts");
+  	var x8 = document.getElementById("tug_provider");
+  	var x9 = document.getElementById("area_details");
+  	var x10 = document.getElementById("navigational_hazards");
+  	var x11 = document.getElementById("ocean_conditions");
+  	var x12 = document.getElementById("environmental_details");
+
+	x1.style.display = 'none';
+	x2.style.display = 'none';
+	x3.style.display = 'none';
+	x4.style.display = 'none';
+	x5.style.display = 'none';
+	x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+	x12.style.display = 'none';
+
+	if (x12.style.display === "none") {
+    x12.style.display = "block";
+    x1.style.display = "none";
+    x2.style.display = "none";
+    x3.style.display = "none";
+    x4.style.display = "none";
+    x5.style.display = "none";
+    x6.style.display = 'none';
+	x7.style.display = 'none';
+	x8.style.display = 'none';
+	x9.style.display = 'none';
+	x10.style.display = 'none';
+	x11.style.display = 'none';
+  } else {
+    x12.style.display = "none";
   }
 }
 

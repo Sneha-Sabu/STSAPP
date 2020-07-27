@@ -1,0 +1,74 @@
+<head>
+
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content">
+    	<h1><center>STS AUDIT LOGS PDF</center></h1>
+    </div>
+
+
+    <!-- HTML Content -->
+
+    <hr>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+		<div class="scrollbar scrollbar-primary"></div>
+		<div id="blacklist">
+			<table class="table table-responsive-md btn-table">
+					<thead>
+					<h3> BLACKLISTED USER LOGS</h3>
+					<tr>
+						<th>Username</th>
+						<th>Modified on</th>
+						<th>Type of modification</th>
+						<th>View modifications</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for t in history2 %}
+					<tr>
+						<td>{{t.username}}</td>
+						<td>{{t.history_date }}</td>
+						<td>{{t.get_history_type_display }}</td>
+						<td><a href="/admin/accounts/blacklist/{{t.id}}/history/{{t.history_id}}/">View</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+		</div>
+		<div id="user">
+			<table class="table table-responsive-md btn-table">
+					<thead>
+					<h3>USER LOGS</h3>
+					<tr>
+						<th>Username</th>
+						<th>Modified on</th>
+						<th>Type of modification</th>
+						<th>Modified by</th>
+						<th>View modifications</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for t in history3 %}
+					<tr>
+						<td>{{ t.username}}</td>
+						<td>{{ t.history_date }}</td>
+						<td>{{ t.get_history_type_display }}</td>
+						<td>{{ t.history_user }}</td>
+
+						<td><a href="/admin/auth/user/{{t.id}}/history/">View</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+
+		<hr>
+
+	</div>
+</body>
