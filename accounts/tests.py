@@ -233,7 +233,7 @@ class SeleniumPasswordLockoutTestCase(LiveServerTestCase):
         password = driver.find_element_by_name('password')
         submit = driver.find_element_by_tag_name('button')
         # Enter credentials on the login form
-        username.send_keys('Alice')
+        username.send_keys('Bob')
         password.send_keys('123')
         submit.send_keys(Keys.RETURN)
         time.sleep(5)
@@ -241,7 +241,7 @@ class SeleniumPasswordLockoutTestCase(LiveServerTestCase):
         password = driver.find_element_by_name('password')
         submit = driver.find_element_by_tag_name('button')
         # Enter credentials on the login form
-        username.send_keys('Alice')
+        username.send_keys('Bob')
         password.send_keys('1234')
         submit.send_keys(Keys.RETURN)
         time.sleep(5)
@@ -249,7 +249,7 @@ class SeleniumPasswordLockoutTestCase(LiveServerTestCase):
         password = driver.find_element_by_name('password')
         submit = driver.find_element_by_tag_name('button')
         # Enter credentials on the login form
-        username.send_keys('Alice')
+        username.send_keys('Bob')
         password.send_keys('123')
         submit.send_keys(Keys.RETURN)
         time.sleep(5)
