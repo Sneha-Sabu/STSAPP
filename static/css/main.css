@@ -138,3 +138,13 @@ i.fas.fa-angle-right {
     border-color: #0065A5 !important;
 }
 
+.spacer5 {
+  height: 20px;
+}
+
+.btn-link {
+    color: #fff;
+}
+
+.btn-link:hover {
+    color: #fff;
