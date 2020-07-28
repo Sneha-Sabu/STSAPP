@@ -7,7 +7,7 @@ from django.forms import ModelForm, Textarea
 from django.utils.translation import gettext_lazy as _
 
 
-choices = [('asia', 'asia'),('africa','africa'),('north america','north america'),('south america','south america'), ('europe','europe'),('australia','australia')]
+choices = [('americas', 'Americas'),('uk','UK'),('north_west_europe','North West Europe'),('mediterranean','Mediterranean'), ('west_africa','West Africa'),('south_africa','South Africa'), ('middle_east','Middle East'), ('indian_subcontinent','Indian Subcontinent'), ('asia_pacific','Asia Pacific')]
 
 class CreateUserForm(UserCreationForm):
     class Meta:
