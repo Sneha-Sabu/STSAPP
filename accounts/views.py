@@ -68,6 +68,17 @@ def allRegions(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['users'])
+def faq(request):
+    return render(request, 'accounts/faq.html')
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def faqadmin(request):
+    return render(request, 'accounts/faqadmin.html')
+
+
+@login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
 def users(request):
     user = User.objects.all()

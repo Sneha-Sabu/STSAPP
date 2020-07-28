@@ -145,9 +145,9 @@ class LocationsForm(forms.ModelForm):
             'Approval_to_conduct_STS_issued_by': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Approval_needed_prior_to_each_STS_operation': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Vessel_sizes_permitted': Textarea(attrs={'cols': 50, 'rows': 1}),
-            'Night_time_berthing_permitted': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Night_time_berthing_permitted': Textarea(attrs={'cols': 50, 'rows': 2}),
             'Local_piloting_additional_information': Textarea(attrs={'cols': 50, 'rows': 1}),
-            'Are_tugs_required': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Are_tugs_required': Textarea(attrs={'cols': 50, 'rows': 2}),
         }
 
 
@@ -175,10 +175,10 @@ class Equipment_DetailsForm(forms.ModelForm):
 
         widgets = {
             'Primary_Fenders': Textarea(attrs={'cols': 50, 'rows': 2}),
-            'Secondary_Fenders': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Secondary_Fenders': Textarea(attrs={'cols': 50, 'rows': 2}),
             'Fender_Moorings': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Rubber_Hoses': Textarea(attrs={'cols': 50, 'rows': 1}),
-            'Composite_Hoses': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Composite_Hoses': Textarea(attrs={'cols': 50, 'rows': 2}),
         }
 
 
@@ -191,7 +191,7 @@ class Agent_DetailsForm(forms.ModelForm):
 
         widgets = {
             'Agent_Company': Textarea(attrs={'cols': 50, 'rows': 2}),
-            'Agent_Contact': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Agent_Contact': Textarea(attrs={'cols': 50, 'rows': 4}),
             'Fees_to_be_incurred_for_STS_Operations': Textarea(attrs={'cols': 50, 'rows': 1}),
         }
 
@@ -207,7 +207,7 @@ class Base_DetailsForm(forms.ModelForm):
         widgets = {
             'Base_Location': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Storage_Space': Textarea(attrs={'cols': 50, 'rows': 1}),
-            'Security_Arrangements': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Security_Arrangements': Textarea(attrs={'cols': 50, 'rows': 2}),
             'Closest_Airport': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Local_taxi_firms': Textarea(attrs={'cols': 50, 'rows': 2}),
             'Accommodation': Textarea(attrs={'cols': 50, 'rows': 1}),
@@ -270,6 +270,7 @@ class Area_DetailsForm(forms.ModelForm):
 
         help_texts = {
             'What_is_considered_port_limits': _('Provide the complete details'),
+            'Average_depth_of_water': _('Do not copy paste any special characters here, manually replace it with the special characters from your QWERTY keyboard'),
         }
         widgets = {
             'Location_under_the_control_of_authorities': Textarea(attrs={'cols': 50, 'rows': 1}),
@@ -278,13 +279,13 @@ class Area_DetailsForm(forms.ModelForm):
             'What_is_considered_international_waters': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Distance_from_support_base': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Transit_time_from_shore_to_STS_location': Textarea(attrs={'cols': 50, 'rows': 1}),
-            'Size_of_transfer_area': Textarea(attrs={'cols': 50, 'rows': 1}),
-            'Does_the_area_have_a_large_enough_run_in_area': Textarea(attrs={'cols': 50, 'rows': 1}),
-            'Is_the_transfer_area_sheltered': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'Size_of_transfer_area': Textarea(attrs={'cols': 50, 'rows': 3}),
+            'Does_the_area_have_a_large_enough_run_in_area': Textarea(attrs={'cols': 50, 'rows': 3}),
+            'Is_the_transfer_area_sheltered': Textarea(attrs={'cols': 50, 'rows': 2}),
             'Regulations_to_be_complied_during_the_operation': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Nature_of_seabed': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Average_depth_of_water': Textarea(attrs={'cols': 80, 'rows': 8}),
-            'STS_location_suitable_for_anchoring': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'STS_location_suitable_for_anchoring': Textarea(attrs={'cols': 50, 'rows': 2}),
             'Any_other_service_provider_in_the_same_vicinity': Textarea(attrs={'cols': 50, 'rows': 1}),
         }
 
@@ -297,11 +298,15 @@ class Navigational_HazardsForm(forms.ModelForm):
             'Any_other_navigational_hazards_in_the_area',
         ]
 
+        help_texts = {
+            'Any_other_navigational_hazards_in_the_area': _('Do not copy paste any special characters here, manually replace it with the special characters from your QWERTY keyboard'),
+        }
+
         widgets = {
             'Local_marine_activity': Textarea(attrs={'cols': 50, 'rows': 2}),
             'Any_physical_limitations_on_vessel_size': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Distance_from_land': Textarea(attrs={'cols': 50, 'rows': 1}),
-            'Any_other_navigational_hazards_in_the_area': Textarea(attrs={'cols': 50, 'rows': 4}),
+            'Any_other_navigational_hazards_in_the_area': Textarea(attrs={'cols': 50, 'rows': 6}),
         }
 
 
@@ -314,14 +319,18 @@ class Met_Ocean_ConditionsForm(forms.ModelForm):
             'STS_Location_covered_by_forecasting_service',
         ]
 
+        help_texts = {
+            'STS_Location_covered_by_forecasting_service': _('Do not copy paste any special characters here, manually replace it with the special characters from your QWERTY keyboard'),
+        }
+
         widgets = {
-            'Prevailing_winds': Textarea(attrs={'cols': 50, 'rows': 2}),
-            'Predominant_current': Textarea(attrs={'cols': 50, 'rows': 2}),
+            'Prevailing_winds': Textarea(attrs={'cols': 50, 'rows': 8}),
+            'Predominant_current': Textarea(attrs={'cols': 50, 'rows': 5}),
             'Average_wave_height': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Average_swell_height_and_period': Textarea(attrs={'cols': 50, 'rows': 2}),
             'What_is_the_tidal_range_if_applicable': Textarea(attrs={'cols': 50, 'rows': 1}),
             'Location_subject_to_restrictive_Met_conditions': Textarea(attrs={'cols': 50, 'rows': 1}),
-            'STS_Location_covered_by_forecasting_service': Textarea(attrs={'cols': 50, 'rows': 1}),
+            'STS_Location_covered_by_forecasting_service': Textarea(attrs={'cols': 50, 'rows': 4}),
         }
 
 
@@ -333,6 +342,10 @@ class Environmental_DetailsForm(forms.ModelForm):
             'Local_oil_pollution_prevention_requirements', 'STS_area_covered_by_oil_spill_organisation',
             'Contract_directly_with_an_Oil_pollution_contractor',
         ]
+
+        help_texts = {
+            'Contract_directly_with_an_Oil_pollution_contractor': _('Do not copy paste any special characters here, manually replace it with the special characters from your QWERTY keyboard'),
+        }
 
         widgets = {
             'Location_adjacent_to_any_public_sensitive_areas': Textarea(attrs={'cols': 50, 'rows': 1}),
@@ -362,7 +375,6 @@ class Entry(models.Model):
         model_form_class=Equipment_DetailsForm
     )
 
-    Agent_Company = models.CharField(max_length=1000, null=True, blank=True)
 
     agent_details = models.EmbeddedModelField(
         model_container=(Agent_Details),
@@ -384,7 +396,6 @@ class Entry(models.Model):
         model_form_class=Support_Craft_DetailsForm
     )
 
-    Provider_Company = models.CharField(max_length=1000, null=True, blank=True)
 
     tug_provider_details = models.EmbeddedModelField(
         model_container=(Tug_Provider_Details),

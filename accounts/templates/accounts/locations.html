@@ -12,7 +12,9 @@
 					<form method="get">
                         {{entryFilter.form}}
                     <button class="btn btn-primary" type="submit">Search</button>
-                        <a class="btn btn-primary" href="{% url 'create_locations' %}">Create Location</a>
+						{% if request.user.is_staff %}
+							<a class="btn btn-primary" href="{% url 'create_locations' %}">Create Location</a>
+						{% endif %}
                     </form>
 
 				</div>

@@ -1,0 +1,210 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<style>
+	div {
+    	text-align:justify;
+    	text-justify:auto;
+	}
+	.btn-link {
+		text-align:justify;
+    	text-justify:auto;
+	}
+</style>
+
+<body>
+<div class="spacer5"></div>
+<div class="container">
+
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="accordion" id="accordionExample">
+					<div class="card">
+						<div class="card-header" id="headingOne">
+							<h5 class="mb-0">
+								<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									<h5>Why am I unable to access the homepage of STS?</h5>
+								</button>
+							</h5>
+						</div>
+
+						<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div class="card-body">
+								The first step as a superadmin user is to create different user groups and assign yourself or any new users to one of the groups to get access to the STS web application.
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingTwo">
+							<h5 class="mb-0">
+								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="False" aria-controls="collapseTwo">
+									<h5>How do I create different user groups?</h5>
+								</button>
+							</h5>
+						</div>
+
+						<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+							<div class="card-body">
+								As a Super-admin user, you have to basically create two groups from the ‘Groups’ section of the admin page.
+								<ul>
+								<li>One group is called ‘admin’ for admin users that grants all the available permissions to make changes to the STS web application.</li>
+								<li>Another group is called ‘users’ for staff users with limited permission to only view the ‘Regions’ and ‘All Locations’ page.</li>
+								</ul>
+								Name of the user groups are case-sensitive so ensure that you use ‘admin’ and ‘user’ in the admin page.
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header" id="headingThree">
+							<h5 class="mb-0">
+								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+									<h5>How do I create different types of users?</h5>
+								</button>
+							</h5>
+						</div>
+						<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+							<div class="card-body">
+								<ul>
+								<li>Navigate to the ‘Users’ section of the admin page and then add new users by providing their username, password and personal information.</li>
+								<li>It is important to assign the users to one of the available groups to enable access to STS web application.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingFour">
+							<h5 class="mb-0">
+								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+									<h5>Why does the user I created with restricted permissions have access to all admin pages?</h5>
+								</button>
+							</h5>
+						</div>
+						<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+							<div class="card-body">
+							 	Though you have an option to grant individual permissions for each user, the permissions granted for each group supersedes the individual permissions. Therefore, even if you create new users by mapping them to ‘admin’ group but by restricting their individual permissions, they will still have access to all permissions granted for the admin group.
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingFive">
+							<h5 class="mb-0">
+								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="False" aria-controls="collapseFive">
+									<h5>How do I remove the blacklisted users and provide access to their webpage?</h5>
+								</button>
+							</h5>
+						</div>
+
+						<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+							<div class="card-body">
+								<ul>
+								<li>The authorized users who have attempted to login with incorrect password thrice will be in the blacklist category.</li>
+								<li>You have to go to the ‘Blacklists’ in the admin page and select the username you would like to provide access. Then, click ‘delete selected blacklists’ from the dropdown action to perform this change.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header" id="headingSix">
+							<h5 class="mb-0">
+								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="False" aria-controls="collapseSix">
+									<h5>How do I add a location to store STS operational details?</h5>
+								</button>
+							</h5>
+						</div>
+
+						<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+							<div class="card-body">
+								<ul>
+								<li>You have to select ‘Entrys’ section in the admin page and then click ‘add entry’ to save STS process data for a new location. </li>
+								<li>Follow the help text menu carefully and fill each of the field values in the mentioned format to view this information in the ‘viewlocations’ page without any issues.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingSeven">
+							<h5 class="mb-0">
+								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="False" aria-controls="collapseSeven">
+									<h5>Why does the generate PDF in viewlocations page throw an error?</h5>
+								</button>
+							</h5>
+						</div>
+
+						<div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+							<div class="card-body">
+								You can verify the special characters entered for the problematic location from your updated location list. Please remove any copy pasted data fields with special characters and manually replace it with the standard characters supported in the QWERTY keyboard. This will facilitate to generate the PDF successfully from the ‘Viewlocations’ page.
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingEight">
+							<h5 class="mb-0">
+								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="False" aria-controls="collapseEight">
+									<h5>Why does the map display the wrong location in the 'viewlocations' page?</h5>
+								</button>
+							</h5>
+						</div>
+
+						<div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+							<div class="card-body">
+								<ul>
+								<li>You have to enter positive degree value for East and North direction whereas negative degree value for South and West direction.</li>
+								<li>Enter the rounded-up degrees, minutes and seconds without any decimals for both latitude and longitude.</li>
+								<li>You do not have to enter any values in the final STS Latitude and STS Longitude fields because the decimal coordinates is automatically calculated using the below formula and stored in the database.</li>
+									<ul>
+										<li>Latitude/Longitude decimal= degrees + (min/60) + (sec/3600)</li>
+									</ul>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingNine">
+							<h5 class="mb-0">
+								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="False" aria-controls="collapseNine">
+									<h5>How do I audit the changes made by other admin users?</h5>
+								</button>
+							</h5>
+						</div>
+
+						<div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+							<div class="card-body">
+								<ul>
+								<li>The ‘Audit logs’ page provides you to audit the user logs, location entry logs and blacklisted user logs.</li>
+								<li>View modifications allows you to verify the detailed changes made by the user.</li>
+								<li>Additionally, this page also allows you to generate PDF of the user logs and blacklisted user logs.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingTen">
+							<h5 class="mb-0">
+								<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="False" aria-controls="collapseTen">
+									<h5>Do I have an option to rollback any updates made by other users to the existing location entry?</h5>
+								</button>
+							</h5>
+						</div>
+
+						<div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
+							<div class="card-body">
+								Yes, each version of the change made by any admin user will be stored in this log with the list of relevant modifications made during the change. You can revert to any of the saved changes by clicking ‘view’ button from the ‘location entry logs’.
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+
+		</div>
+</div>
+</body>
+
+{% endblock %}

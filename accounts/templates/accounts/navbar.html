@@ -38,6 +38,15 @@
              <li class="nav-item active">
               <a class="nav-link" href="{% url 'locations' %}">All Locations</a>
             </li>
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> FAQs</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="{% url 'faq' %}">User FAQs</a></li>
+                  {% if request.user.is_staff %}
+                  <li><a class="dropdown-item" href="{% url 'faqadmin' %}">Admin FAQs</a></li>
+                  {% endif %}
+              </ul>
+            </li>
         </ul>
     </div>
 

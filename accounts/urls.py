@@ -16,5 +16,7 @@ urlpatterns = [
     path('auditlogs/', views.AuditLogsView, name="auditlogs"),
     path('pdf_auditlogs/', views.Download_auditlogsPDF.as_view(), name="pdf_auditlogs"),
     path('pdf_viewlocations/<str:pk>/', views.DownloadviewlocationsPDF.as_view(), name="pdf_viewlocations"),
+    path('faq/', views.faq, name="faq"),
+    path('faqadmin/', views.faqadmin, name="faqadmin")
 
 ]

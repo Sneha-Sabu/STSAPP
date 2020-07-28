@@ -1,0 +1,87 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<style>
+	div {
+    	text-align:justify;
+    	text-justify:auto;
+	}
+	.btn-link {
+		text-align:justify;
+    	text-justify:auto;
+	}
+</style>
+<body>
+<div class="spacer5"></div>
+<div class="container">
+
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				              <div class="accordion" id="accordionExample">
+							  <div class="card">
+								<div class="card-header" id="headingOne">
+								  <h5 class="mb-0">
+									<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+										<h5>How do I search the location name to view the STS details?</h5>
+									</button>
+								  </h5>
+								</div>
+
+								<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+								  <div class="card-body">
+									  You can search for the location name either in the ‘All Locations’ page or select the specific region from the ‘Regions’ page. Then, you can view the complete details by selecting ‘View more details’ on the extreme right of each location name.
+								  </div>
+								</div>
+							  </div>
+							  <div class="card">
+								<div class="card-header" id="headingTwo">
+								  <h5 class="mb-0">
+									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+										<h5>Do I have an option to download the complete STS location details?</h5>
+									</button>
+								  </h5>
+								</div>
+								<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+								  <div class="card-body">
+									Yes, you can click the ‘Generate PDF’ button from the ‘Viewlocations’ page to download the STS operational details of each location.</div>
+								</div>
+							  </div>
+							  <div class="card">
+								<div class="card-header" id="headingThree">
+								  <h5 class="mb-0">
+									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+										<h5>Why am I unable to download the location information?</h5>
+									</button>
+								  </h5>
+								</div>
+								<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+								  <div class="card-body">
+									There might be a temporary issue in the data format uploaded by the admin user. Please email admin@gmail.com to resolve this download issue.
+								  </div>
+								</div>
+							  </div>
+							  <div class="card">
+								<div class="card-header" id="headingFour">
+								  <h5 class="mb-0">
+									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+										<h5>I want to review the comparison of specific field values for different locations. Do I have an option to view any customised report in my dashboard?</h5>
+									</button>
+								  </h5>
+								</div>
+								<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+								  <div class="card-body">
+									You have been given access to view the default location pages comprising STS process details. Please email admin@gmail.com by providing detailed information of your customised report request and they will revert you with the feasible report options.
+								  </div>
+								</div>
+							  </div>
+			</div>
+			<div class="col-md-2"></div>
+
+		</div>
+</div>
+</body>
+
+{% endblock %}
