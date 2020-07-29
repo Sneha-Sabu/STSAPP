@@ -32,14 +32,21 @@
       <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Username</th>
+      <th>Location Name</th>
+      <th>STS Position</th>
+      <th>Cargoes Permitted</th>
+      <th>View more details</th>
 
     </tr>
   </thead>
   <tbody>
-    {% for user in locations %}
+    {% for i in locations %}
       <tr>
-        <td>{{ user.Location_Name }}</td>
+          <td>{{ i.Location_Name }}</td>
+          <td>{{ i.STS_Latitude }} , {{i.STS_Longitude}}</td>
+          <td>{{ i.locations.Cargos_permitted }}</td>
+          <td><a class="btn btn-sm btn-info" href="{% url 'viewlocations' i.id %}">View more details</a>
+</td>
 
       </tr>
     {% endfor %}
