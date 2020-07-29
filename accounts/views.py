@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import time
 from django.contrib import messages
 from .decorators import unauthenticated_user, allowed_users, admin_only
@@ -17,6 +18,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
+
 
 
 # Create your views here.
@@ -36,16 +38,23 @@ def home(request):
 
 
 @login_required(login_url='login')
-
 def locations(request):
     entry = Entry.objects.all()
     entryFilter = EntryFilter(request.GET, queryset=entry)
     entry = entryFilter.qs
-    context = {'entry': entry, 'entryFilter': entryFilter}
+    paginator = Paginator(entry, 4)
+    page = request.GET.get('page', 1)
+
+    try:
+        locations = paginator.page(page)
+    except PageNotAnInteger:
+        locations = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+    context = {'entry': entry, 'locations': locations, 'entryFilter': entryFilter, 'paginator': paginator}
     return render(request, 'accounts/locations.html', context)
 
 @login_required(login_url='login')
-
 def viewlocations(request, pk):
     entry = Entry.objects.get(id=pk)
     context = {'entry': entry}
@@ -84,7 +93,17 @@ def users(request):
     user = User.objects.all()
     myFilter = UserFilter(request.GET, queryset=user)
     user = myFilter.qs
-    context = {'user': user, 'myFilter': myFilter}
+    paginator = Paginator(user, 4)
+    page = request.GET.get('page', 1)
+
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    context = {'user': user, 'users': users, 'myFilter': myFilter, 'paginator': paginator, }
     return render(request, 'accounts/users.html', context)
 
 

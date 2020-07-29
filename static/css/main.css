@@ -148,3 +148,11 @@ i.fas.fa-angle-right {
 
 .btn-link:hover {
     color: #fff;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #0065A5 !important;
+    border-color: #0065A5 !important;
+}

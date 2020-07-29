@@ -1,57 +1,82 @@
 {% extends 'accounts/main.html' %}
-{% load static %}
 {% block content %}
+<style>
+    .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #0065A5 !important;
+    border-color: #0065A5 !important;
+}
 
 
+</style>
+  <br/>
 
-    <br>
-
-		<div class="row">
-			<div class="col-md">
-				<div class="card card-body">
-					<form method="get">
+        <br>
+        <div class="row">
+            <div class="col">
+                <div class="card card-body">
+                    <form method="get">
                         {{entryFilter.form}}
+
                     <button class="btn btn-primary" type="submit">Search</button>
-						{% if request.user.is_staff %}
-							<a class="btn btn-primary" href="{% url 'create_locations' %}">Create Location</a>
-						{% endif %}
-                    </form>
+						<a class="btn btn-primary" href="{% url 'locations' %}">New Search</a>
+						<a class="btn btn-primary" href="{% url 'create_locations' %}">Create New Location</a>
+                  </form>
+                </div>
+            </div>
 
-				</div>
-				<div class="card card-body">
-					<table class="table">
-						<tr>
-							<th>Location</th>
-							<th>STS Position</th>
-							<th>Types of cargos transferred</th>
-							<th>More details</th>
+        </div>
+        <br>
 
-						</tr>
+      <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Username</th>
 
-						{% for i in entry %}
-							<tr>
-								<td>
-									{{i.locations.name}}
-								</td>
-								<td>
-									{{i.STS_Latitude}}, {{i.STS_Longitude}}
-								</td>
-								<td>
-									{{i.locations.Cargos_permitted}}
-								</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in locations %}
+      <tr>
+        <td>{{ user.Location_Name }}</td>
 
-								<td>
-									<a class="btn btn-sm btn-info" href="{% url 'viewlocations' i.id %}">View more details</a>
-								</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
-							</tr>
-						{% endfor %}
+{% if locations.has_other_pages %}
+<nav aria-label="...">
+  <ul class="pagination">
 
-					</table>
-				</div>
-			</div>
+      {% if locations.has_previous %}
+      <li class="page-item">
+        <li class="page-item"><a class="page-link" href="?page={{ locations.previous_page_number }}">Previous</a></li>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+      {% endif %}
+      {% for i in locations.paginator.page_range %}
+      {% if locations.number == i %}
+      <li class="page-item active"><a class="page-link"><span>{{ i }} <span class="sr-only">(current)</span></span></a></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+      {% endfor %}
+      {% if locations.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ locations.next_page_number }}">Next</a></li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Next</a>
+      </li>
+      {% endif %}
 
-		</div>
 
+  </ul>
+</nav>
 
+{% endif %}
 {% endblock %}
