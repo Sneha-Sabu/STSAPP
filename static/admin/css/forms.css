@@ -74,6 +74,8 @@ form ul.inline li {
     width: 160px;
     word-wrap: break-word;
     line-height: 1;
+    font-weight: 900;
+    text-transform: capitalize;
 }
 
 .aligned label:not(.vCheckboxLabel):after {
@@ -529,4 +531,8 @@ form .related-widget-wrapper ul {
 
 .clearable-file-input input {
     margin-top: 0;
+}
+
+p.help {
+    color: black !important;
 }

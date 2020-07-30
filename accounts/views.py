@@ -256,9 +256,10 @@ class DownloadviewlocationsPDF(View):
         context = {'entry': entry}
         pdf = render_to_pdf('accounts/pdf_viewlocations.html',context)
         response = HttpResponse(pdf, content_type='application/pdf')
-        filename = "location.pdf"
+        filename = "%s information sheet.pdf" % (entry.Location_Name)
         content = "attachment; filename=%s" % (filename)
         response['Content-Disposition'] = content
         return response
+
 
 

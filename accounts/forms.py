@@ -21,6 +21,8 @@ class EntryForm(forms.ModelForm):
         model = Entry
         fields = ('number_of_images', 'region',)
         help_texts = {
+            'Location_Name': _(
+                'Enter the Location Name without any special characters e.g. comma(,), hifen (-), etc.'),
             'degrees_latitude': _(
                 'Enter the positive degree value for East and North direction; enter the negative degree value for South and West direction.'),
             'degrees_longitude': _(
