@@ -2,9 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 import datetime
 import time
-import unittest
 from django.utils import timezone
-from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.forms import EntryForm
 from django.contrib.auth import authenticate
 from .models import *
@@ -12,24 +10,202 @@ from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-# Unit test to check Login page
-class LoginFunctionalTest(unittest.TestCase):
+
+# Functional Test to check login functionality, user search functionality, location search and view more details functionalities on the site with Selenium
+class FunctionalTestCase(LiveServerTestCase):
     def setUp(self):
-        self.browser = webdriver.Chrome(executable_path=r'C:\\Users\\snesh\\webdriver\\chromedriver.exe')
-        self.browser.implicitly_wait(3)
+        self.driver = webdriver.Chrome(executable_path=r'C:\\Users\\snesh\\webdriver\\chromedriver.exe')
+        self.driver.maximize_window()
 
     def tearDown(self):
-        self.browser.quit()
+        self.driver.quit()
+        
+    def test_login(self):
+        # Login form
+        self.driver.get('https://sts-app.azurewebsites.net/login/')
+        username = self.driver.find_element_by_name('username')
+        password = self.driver.find_element_by_name('password')
+        submit = self.driver.find_element_by_tag_name('button')
+        # Enter credentials on the login form
+        username.send_keys('admin')
+        password.send_keys('stsjf2020')
+        submit.send_keys(Keys.RETURN)
+        time.sleep(5)
 
-    def test_login_page(self):
-        self.browser.get('https://sts-app.azurewebsites.net/login/')
-        assert 'Login' in self.browser.title
-        self.browser.implicitly_wait(10)
+        # Accessing the 'Users' page to view details of registered users on the application
+        users_link = self.driver.find_element_by_link_text('Users')
+        users_link.click()
+        time.sleep(5)
+        # Searching for a user using the search by username filter
+        username = self.driver.find_element_by_id('id_username')
+        username.send_keys('ad')
+        username.send_keys(Keys.ENTER)
+        time.sleep(5)
+
+        # Accessing the 'Locations' page to view details of All location entries created on the application
+        locations_link = self.driver.find_element_by_link_text('All Locations')
+        locations_link.click()
+        time.sleep(5)
+        # Searching for a location using the search by location name filter
+        locations = self.driver.find_element_by_id('id_locations')
+        locations.send_keys('Mald')
+        locations.send_keys(Keys.ENTER)
+        time.sleep(5)
+
+        # Accessing 'More details page' of the searched location
+        more_details_link = self.driver.find_element_by_link_text('View more details')
+        more_details_link.click()
+        time.sleep(5)
+
+        # Accessing the 'Audit logs' page to view a list of modifications made to the Location entries, Blacklisted users and User accounts
+        audit_log_link = self.driver.find_element_by_link_text('Audit logs')
+        audit_log_link.click()
+        time.sleep(5)
+
+        # Accessing the 'Admin panel' page to manage the user accounts, location entries, etc.
+        admin_link = self.driver.find_element_by_link_text('Admin')
+        admin_link.click()
+        time.sleep(5)
+
+        # Accessing the 'Users' page on the Admin panel to manage user accounts
+        admin_users_link = self.driver.find_element_by_link_text('Users')
+        admin_users_link.click()
+        time.sleep(5)
+
+        # Accessing the 'Add user' page on the Admin panel to add a user account
+        add_admin_users_link = self.driver.find_element_by_class_name('addlink')
+        add_admin_users_link.click()
+        time.sleep(5)
+        add_admin_username = self.driver.find_element_by_id('id_username')
+        add_admin_username.send_keys('Alice')
+        add_admin_password1 = self.driver.find_element_by_id('id_password1')
+        add_admin_password1.send_keys('university@123')
+        add_admin_password2 = self.driver.find_element_by_id('id_password2')
+        add_admin_password2.send_keys('university@123')
+        save = self.driver.find_element_by_name('_save')
+        save.send_keys(Keys.RETURN)
+        time.sleep(10)
 
 
-if __name__ == '__main__':
-    unittest.main()
+# Integration Test to login as a user, search for a location, view more details of the location and download the pdf with location information
+class IntegrationTestCase(LiveServerTestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome(executable_path=r'C:\\Users\\snesh\\webdriver\\chromedriver.exe')
+        self.driver.maximize_window()
 
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_login(self):
+        # Login form
+        self.driver.get('https://sts-app.azurewebsites.net/login/')
+        username = self.driver.find_element_by_name('username')
+        password = self.driver.find_element_by_name('password')
+        submit = self.driver.find_element_by_tag_name('button')
+        # Enter credentials on the login form
+        username.send_keys('admin')
+        password.send_keys('stsjf2020')
+        submit.send_keys(Keys.RETURN)
+        time.sleep(5)
+
+        # Accessing the 'Locations' page to view details of All location entries created on the application
+        locations_link = self.driver.find_element_by_link_text('All Locations')
+        locations_link.click()
+        time.sleep(5)
+        # Searching for a location using the search by location name filter
+        locations = self.driver.find_element_by_id('id_locations')
+        locations.send_keys('Mald')
+        locations.send_keys(Keys.ENTER)
+        time.sleep(5)
+
+        # Accessing 'More details page' of the searched location
+        more_details_link = self.driver.find_element_by_link_text('View more details')
+        more_details_link.click()
+        time.sleep(5)
+        download_pdf_link = self.driver.find_element_by_link_text('Generate PDF')
+        download_pdf_link.click()
+        time.sleep(5)
+
+
+
+# Unit Test to check incorrect password attempts. After 3 attempts the user should get blacklisted
+class PasswordLockoutTestCase(LiveServerTestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome(executable_path=r'C:\\Users\\snesh\\webdriver\\chromedriver.exe')
+        self.driver.maximize_window()
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_blacklist(self):
+        # Login form
+        self.driver.get('https://sts-app.azurewebsites.net/login/')
+        username = self.driver.find_element_by_name('username')
+        password = self.driver.find_element_by_name('password')
+        submit = self.driver.find_element_by_tag_name('button')
+        # Enter credentials on the login form
+        username.send_keys('Bob')
+        password.send_keys('123')
+        submit.send_keys(Keys.RETURN)
+        time.sleep(5)
+        username = self.driver.find_element_by_name('username')
+        password = self.driver.find_element_by_name('password')
+        submit = self.driver.find_element_by_tag_name('button')
+        # Enter credentials on the login form
+        username.send_keys('Bob')
+        password.send_keys('1234')
+        submit.send_keys(Keys.RETURN)
+        time.sleep(5)
+        username = self.driver.find_element_by_name('username')
+        password = self.driver.find_element_by_name('password')
+        submit = self.driver.find_element_by_tag_name('button')
+        # Enter credentials on the login form
+        username.send_keys('Bob')
+        password.send_keys('123')
+        submit.send_keys(Keys.RETURN)
+        time.sleep(5)
+
+
+# Unit test to check redirection for Admin and normal users after Login
+class checkLoginTest(TestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome(executable_path=r'C:\\Users\\snesh\\webdriver\\chromedriver.exe')
+        self.driver.maximize_window()
+
+    def tearDown(self):
+        self.driver.quit()
+
+    # Test to check redirection to Dashboard page for Admin users after logging in
+    def test_login_redirect_admin(self):
+        self.driver.get('https://sts-app.azurewebsites.net/login/')
+        assert 'Login' in self.driver.title
+        time.sleep(2)
+        username = self.driver.find_element_by_name('username')
+        password = self.driver.find_element_by_name('password')
+        submit = self.driver.find_element_by_tag_name('button')
+        # Enter credentials on the login form
+        username.send_keys('admin')
+        password.send_keys('stsjf2020')
+        submit.send_keys(Keys.RETURN)
+        assert 'STS Application' in self.driver.title
+        time.sleep(5)
+        logout_link = self.driver.find_element_by_link_text('Logout')
+        logout_link.click()
+
+    # Test to check redirection to Profile page for normal users after logging in
+    def test_login_redirect_user(self):
+        self.driver.get('https://sts-app.azurewebsites.net/login/')
+        assert 'Login' in self.driver.title
+        time.sleep(2)
+        username = self.driver.find_element_by_name('username')
+        password = self.driver.find_element_by_name('password')
+        submit = self.driver.find_element_by_tag_name('button')
+        # Enter credentials on the login form
+        username.send_keys('user')
+        password.send_keys('stsjf2020')
+        submit.send_keys(Keys.RETURN)
+        assert 'User Profile' in self.driver.title
+        time.sleep(5)
 
 
 
@@ -123,133 +299,44 @@ class EntryModelTests(TestCase):
         self.assertIs(recent_entry.was_published_recently(), True)
 
 # Unit Test to check whether the Dashboard view page is restricted to just logged in users
-class HomeView(LoginRequiredMixin):
+class HomeView(TestCase):
     model = Entry
     template_name ='accounts/dashboard.html'
 
-    def get_queryset(self):
-        return EntryInstance.objects.order_by('id')
-
-    def test_redirect_if_not_logged_in(self):
-        response = self.client.get(reverse('dashboard'))
-        self.assertRedirects(response, '/accounts/login/?next=/')
+    def test_redirect_home_if_not_logged_in(self):
+        client = Client()
+        response = self.client.get('https://sts-app.azurewebsites.net/')
+        self.assertRedirects(response, '/login/?next=/')
 
 # Unit Test to check whether the Locations view page is restricted to just logged in users
-class LocationsView(LoginRequiredMixin):
+class LocationsView(TestCase):
     model = Entry
     template_name ='accounts/locations.html'
 
-    def get_queryset(self):
-        return EntryInstance.objects.order_by('id')
-
-    def test_redirect_if_not_logged_in(self):
-        response = self.client.get(reverse('locations'))
-        self.assertRedirects(response, '/accounts/login/?next=/')
-
-    def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('locations'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'accounts/locations.html')
+    def test_redirect_locations_if_not_logged_in(self):
+        client = Client()
+        response = self.client.get('https://sts-app.azurewebsites.net/locations/')
+        self.assertRedirects(response, '/login/?next=/locations/')
 
 
-# Integration Test to check login functionality, user search functionality, location search and view more details functionalities on the site with Selenium
-class SeleniumTestCase(LiveServerTestCase):
-    def test_login(self):
-        driver = webdriver.Chrome(executable_path=r'C:\\Users\\snesh\\webdriver\\chromedriver.exe')
-        driver.maximize_window()
-        # Login form
-        driver.get('https://sts-app.azurewebsites.net/login/')
-        username = driver.find_element_by_name('username')
-        password = driver.find_element_by_name('password')
-        submit = driver.find_element_by_tag_name('button')
-        # Enter credentials on the login form
-        username.send_keys('admin')
-        password.send_keys('stsjf2020')
-        submit.send_keys(Keys.RETURN)
-        time.sleep(5)
+# Unit Test to check whether the Audit logs view page is restricted to just logged in users
+class AuditLogsView(TestCase):
+    model = Entry
+    template_name ='accounts/auditlogs.html'
 
-        # Accessing the 'Users' page to view details of registered users on the application
-        users_link = driver.find_element_by_link_text('Users')
-        users_link.click()
-        time.sleep(5)
-        # Searching for a user using the search by username filter
-        username = driver.find_element_by_id('id_username')
-        username.send_keys('ad')
-        username.send_keys(Keys.ENTER)
-        time.sleep(5)
+    def test_redirect_auditlogs_if_not_logged_in(self):
+        client = Client()
+        response = self.client.get('https://sts-app.azurewebsites.net/auditlogs/')
+        self.assertRedirects(response, '/login/?next=/auditlogs/')
 
-        # Accessing the 'Locations' page to view details of All location entries created on the application
-        locations_link = driver.find_element_by_link_text('All Locations')
-        locations_link.click()
-        time.sleep(5)
-        # Searching for a location using the search by location name filter
-        locations = driver.find_element_by_id('id_locations')
-        locations.send_keys('Mald')
-        locations.send_keys(Keys.ENTER)
-        time.sleep(5)
 
-        # Accessing 'More details page' of the searched location
-        more_details_link = driver.find_element_by_link_text('View more details')
-        more_details_link.click()
-        time.sleep(5)
+# Unit Test to check whether the Audit logs view page is restricted to just logged in users
+class usersView(TestCase):
+    model = User
+    template_name ='accounts/users.html'
 
-        # Accessing the 'Audit logs' page to view a list of modifications made to the Location entries, Blacklisted users and User accounts
-        audit_log_link = driver.find_element_by_link_text('Audit logs')
-        audit_log_link.click()
-        time.sleep(5)
+    def test_redirect_users_if_not_logged_in(self):
+        client = Client()
+        response = self.client.get('https://sts-app.azurewebsites.net/users/')
+        self.assertRedirects(response, '/login/?next=/users/')
 
-        # Accessing the 'Admin panel' page to manage the user accounts, location entries, etc.
-        admin_link = driver.find_element_by_link_text('Admin')
-        admin_link.click()
-        time.sleep(5)
-
-        # Accessing the 'Users' page on the Admin panel to manage user accounts
-        admin_users_link = driver.find_element_by_link_text('Users')
-        admin_users_link.click()
-        time.sleep(5)
-
-        # Accessing the 'Add user' page on the Admin panel to add a user account
-        add_admin_users_link = driver.find_element_by_class_name('addlink')
-        add_admin_users_link.click()
-        time.sleep(5)
-        add_admin_username = driver.find_element_by_name('username')
-        add_admin_username.send_keys('Alice')
-        add_admin_password1 = driver.find_element_by_name('password1')
-        add_admin_password1.send_keys('university@123')
-        add_admin_password2 = driver.find_element_by_name('password2')
-        add_admin_password2.send_keys('university@123')
-        save = driver.find_element_by_name('_save')
-        save.send_keys(Keys.RETURN)
-        time.sleep(10)
-
-# Integration Test to check incorrect password attempts. After 3 attempts the user should get blacklisted
-class SeleniumPasswordLockoutTestCase(LiveServerTestCase):
-    def test_blacklist(self):
-        driver = webdriver.Chrome(executable_path=r'C:\\Users\\snesh\\webdriver\\chromedriver.exe')
-        driver.maximize_window()
-        # Login form
-        driver.get('https://sts-app.azurewebsites.net/login/')
-        username = driver.find_element_by_name('username')
-        password = driver.find_element_by_name('password')
-        submit = driver.find_element_by_tag_name('button')
-        # Enter credentials on the login form
-        username.send_keys('Bob')
-        password.send_keys('123')
-        submit.send_keys(Keys.RETURN)
-        time.sleep(5)
-        username = driver.find_element_by_name('username')
-        password = driver.find_element_by_name('password')
-        submit = driver.find_element_by_tag_name('button')
-        # Enter credentials on the login form
-        username.send_keys('Bob')
-        password.send_keys('1234')
-        submit.send_keys(Keys.RETURN)
-        time.sleep(5)
-        username = driver.find_element_by_name('username')
-        password = driver.find_element_by_name('password')
-        submit = driver.find_element_by_tag_name('button')
-        # Enter credentials on the login form
-        username.send_keys('Bob')
-        password.send_keys('123')
-        submit.send_keys(Keys.RETURN)
-        time.sleep(5)
