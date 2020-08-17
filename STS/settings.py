@@ -83,17 +83,16 @@ WSGI_APPLICATION = 'STS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'ClusterSTSdemo',
-        'USER': 'adminDbUser',
-        'PASSWORD': 'sts2020',
-        'HOST': 'mongodb+srv://adminDbUser:sts2020@clusterstsdemo.pgdsp.azure.mongodb.net/ClusterSTSdemo?retryWrites=true&w=majority',
+        'NAME': 'STS',
+        'USER': 'dbUser',
+        'PASSWORD': '123',
+        'HOST': 'mongodb+srv://dbUser:123@sts.flven.azure.mongodb.net/STS?retryWrites=true&w=majority',
         'SSL' : 'true',
         'TEST': {
             'NAME': 'mytestdatabase',
-            'NAME': 'ClusterSTSdemo',
-            'USER': 'adminDbUser',
-            'PASSWORD': 'sts2020',
-            'HOST': 'mongodb+srv://adminDbUser:sts2020@clusterstsdemo.pgdsp.azure.mongodb.net/ClusterSTSdemo?retryWrites=true&w=majority',
+            'USER': 'dbUser',
+            'PASSWORD': '123',
+            'HOST': 'mongodb+srv://dbUser:123@sts.flven.azure.mongodb.net/mytestdatabase?retryWrites=true&w=majority',
             'SSL' : 'true',
         },
 
