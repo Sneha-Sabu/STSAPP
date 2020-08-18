@@ -1,14 +1,14 @@
 # STS WEB APPLICATION :computer:
-###### *Developed by - @Sneha Sabu - Student ID: 51987943, @Ruilin Wang - Student ID: 51986323, @Barkavi Sundararajan - Student ID: 51989442, @Bowen Zhang - Student ID: 51987570*
+###### *Developed by - Sneha Sabu - Student ID: 51987943, Ruilin Wang - Student ID: 51986323, Barkavi Sundararajan - Student ID: 51989442, Bowen Zhang - Student ID: 51987570*
 ### About the application:
-STS Application is a Python based application developed on the Django framework. It is a database-driven application for Fendercare Ship-to-Ship process which provides a platform to access the operational status of services being provided, and to manage information and logistics of the operations
+STS Application is a Python based application developed on the Django framework. It is a database-driven application for Fendercare Ship-to-Ship process which provides a platform to access the operational status of services being provided, and to manage information and logistics of the operations.
 
 
 ## Deployed application
 The live application has been deployed on Microsoft Azure and can be accessed through the following link:  
 https://sts-app.azurewebsites.net/
 
-* You can use these account details to log in as an Admin user:   
+* You can use these account details to log in to the STS Application as an Admin user:   
 Username - admin  
 Password - stsjf2020 
 
@@ -90,7 +90,7 @@ http://localhost:8000/
 ![Image4](https://github.com/UoA-CS5942/team_charlie_2020/blob/master/static/images/deployment4.jpg?raw=true)  
 This is because the code defines two groups of users: **Admin and Users** to whom the webpages are accessible. Therefore, the next step is to create these two groups from the admin panel.
 18. Navigate to the following url in order to create the 'Admin' and 'Users' groups:  
-http://localhost:8000/
+http://localhost:8000/admin
 19. Now click on the **'Groups'** link and click on the **'Add Group'** button on the top right corner. 
 20. Create a group for admin users called **'admin'** as shown in the following image and save the group. (Note: the name is case-sensitive so save the name with a small 'a' not a capital 'A'.)
 ![Image5](https://github.com/UoA-CS5942/team_charlie_2020/blob/master/static/images/deployment5.jpg?raw=true)  
@@ -178,7 +178,7 @@ https://www.mongodb.com/try
 16. After the cluster has been created, click on the **'Database Access'** section as displayed in the image below to create a new Database user for your cluster and remember the password for this user. While entering the details, also assign **'Atlas admin'** role to the user:
 ![Image15](https://github.com/UoA-CS5942/team_charlie_2020/blob/master/static/images/deployment15.jpg?raw=true)  
 
-17. Now click on the **'Network Access'** section to configure network access from everywhere including your Microsoft Azure deployed website. Click on the **'IP Whitelist'** section and add an IP address entry with the value **'0.0.0.0/0'** to allow access from all network connections as displayed in the screenshot below:  
+17. In order to allow the deployed application to interact with the MongoDB Atlas cluster, go to the **'Properties'** section of your deployed application on Microsoft Azure and copy all the outbound IP addresses. Now on the MongoDB Atlas account click on the **'Network Access'** section to configure network access from the outbound IP addresses of the deployed application. Click on the **'IP Whitelist'** section and add each outbound IP address entry one after the other to allow access from all the outbound IP addresses of the deployed application as displayed in the screenshot below:  
 ![Image16](https://github.com/UoA-CS5942/team_charlie_2020/blob/master/static/images/deployment16.jpg?raw=true)  
 
 18. Now that you have created a cluster, database user and configured the network access of your cluster, you can click on the **'Connect'** button as displayed in the image below and then click on **'Connect your application'** to copy the connection details to your MongoDB cluster which will be required to connect your deployed Azure site with your MongoDB Atlas cluster:  
@@ -248,8 +248,8 @@ Enter a username, email id and password for the account as shown in the followin
 36. Upon entering the above link, a login form will be displayed. Enter the superuser account username and password you created in Step 33.
 37. After logging in you will be redirected to a page with the following message:  
 ![Image26](https://github.com/UoA-CS5942/team_charlie_2020/blob/master/static/images/deployment26.jpg?raw=true)  
-
 This is because the code defines two groups of users: **Admin** and **Users** to whom the webpages are accessible. Therefore, the next step is to create these two groups from the admin panel.  
+
 38. Navigate to admin page in order to create the **'Admin'** and **'Users'** groups:  
 http://linkofthewebsite/admin/  
 Replace **linkofthewebsite** with the url of your deployed site.
@@ -308,41 +308,50 @@ pip install webencodings==0.5.1
 * Selenium based Integration testing to test behavior of Web pages. Series of functional test cases written to verify the correctness of each functionality, verify how different components work together and to simulate a real user's interactions with multiple pages and functionalities on the STS application.
 
 ### Running the Tests of the Application on a Local Machine
-1. In order for some integration tests to function, make sure you have a user named **'Bob'** stored within the database and is not blacklisted. The purpose of the test is to ensure the correctness of the blacklist functionality after 3 incorrect password attempts of the user. In order to create a user named **'Bob'**, go to the following link to create a user:  
+1. In order for some integration tests to function, make sure you have a user named **'Bob'** stored within the database who is not blacklisted. The purpose of the test is to ensure the correctness of the blacklist functionality after 3 incorrect password attempts of the user. In order to create a user named **'Bob'**, go to the following link to create a user:  
 http://localhost:8000/admin/auth/user/add/
-2. In order for some integration tests to function, make sure you have a user named **'admin'** stored within the database. The purpose of the test is to ensure the correctness of the search filter on the Users page. In order to create the user, go to the following link:  
+2. In order for some integration tests to function, make sure you have a user named **'admin'** stored within the database with the password **'stsjf2020'**. The purpose of the test is to ensure the correctness of the search filter on the Users page. In order to create the user, go to the following link:  
 http://localhost:8000/admin/auth/user/add/
-3. In order for some integration tests to function, make sure you have a location named **'Maldives'** stored within the database. The purpose of the test is to ensure the correctness of the search filter on the Locations page. In order to create the location, go to the following link:  
+3. In order for some integration tests to function, make sure you have a user named **'user'** stored within the database with the password **'stsjf2020'**. The purpose of the test is to ensure the correctness of the login redirection for normal users. In order to create the user, go to the following link:  
+http://localhost:8000/admin/auth/user/add/
+4. In order for some integration tests to function, make sure you have a location named **'Maldives'** stored within the database. The purpose of the test is to ensure the correctness of the search filter on the Locations page. In order to create the location, go to the following link:  
 http://localhost:8000/admin/accounts/entry/add/
-4. In order for some integration tests to function, make sure you **don't** have a user named **'Alice'** stored within the database. The purpose of the test is to ensure the admin can create a new user account on the admin panel. In order to check whether the user account doesn't exist, go to the following link:  
+5. In order for some integration tests to function, make sure you **don't** have a user named **'Alice'** stored within the database. The purpose of the test is to ensure the admin can create a new user account on the admin panel. In order to check whether the user account doesn't exist, go to the following link:  
 http://localhost:8000/admin/auth/user/  
-5. In order to run the tests on the local machine, you will need to open two command prompts. One to run the localhost server and the other to run the tests. Therefore **'cd'** into the working directory of the STS application on your local machine on both the terminals. 
-6. On terminal window 1 run the server using the **python manage.py runserver** command.
-7. Now to run the tests on terminal window 2 run the following command:  
+6. In order to run the tests on the local machine, you will need to open two command prompts. One to run the localhost server and the other to run the tests. Therefore **'cd'** into the working directory of the STS application on your local machine on both the terminals. 
+7. On terminal window 1 run the server using the **python manage.py runserver** command.
+8. Now to run the tests on terminal window 2 run the following command:  
 **python manage.py test accounts**
-8. Upon running the tests, you should see the following message displayed in the image:  
+9. Upon running the tests, you should see the following message displayed in the image:  
 ![Image32](https://github.com/UoA-CS5942/team_charlie_2020/blob/master/static/images/testing.jpg?raw=true)  
 
 
 ### Running the Tests of the Deployed Application on a local machine
-1. In order for some integration tests to function, make sure you have a user named **'Bob'** stored within the database and is not blacklisted. The purpose of the test is to ensure the correctness of the blacklist functionality after 3 incorrect password attempts of the user. In order to create a user named **'Bob'**, go to the following link to create a user:  
-http://linkofthewebsite/admin/auth/user/add/  
+1. In order for some integration tests to function, make sure you have a user named **'Bob'** stored within the database who is not blacklisted. The purpose of the test is to ensure the correctness of the blacklist functionality after 3 incorrect password attempts of the user. In order to create a user named **'Bob'**, go to the following link to create a user:  
+https://linkofthewebsite/admin/auth/user/add/  
 Replace **linkofthewebsite** with the url of your deployed site.
-2. In order for some integration tests to function, make sure you have a user named **'admin'** stored within the database. The purpose of the test is to ensure the correctness of the search filter on the Users page. In order to create the user, go to the following link:  
-http://linkofthewebsite/admin/auth/user/add/  
+2. In order for some integration tests to function, make sure you have a user named **'admin'** stored within the database with the password **'stsjf2020'**. The purpose of the test is to ensure the correctness of the search filter on the Users page. In order to create the user, go to the following link:  
+https://linkofthewebsite/admin/auth/user/add/  
 Replace **linkofthewebsite** with the url of your deployed site.
-3. In order for some integration tests to function, make sure you have a location named **'Maldives'** stored within the database. The purpose of the test is to ensure the correctness of the search filter on the Locations page. In order to create the location, go to the following link:  
-http://linkofthewebsite/admin/accounts/entry/add/  
+3. In order for some integration tests to function, make sure you have a user named **'user'** stored within the database with the password **'stsjf2020'**. The purpose of the test is to ensure the correctness of the login redirection for normal users. In order to create the user, go to the following link: 
+https://linkofthewebsite/admin/auth/user/add/  
+Replace **linkofthewebsite** with the url of your deployed site.
+4. In order for some integration tests to function, make sure you have a location named **'Maldives'** stored within the database. The purpose of the test is to ensure the correctness of the search filter on the Locations page. In order to create the location, go to the following link:  
+https://linkofthewebsite/admin/accounts/entry/add/  
 Replace **linkofthewebsite** with the url of your deployed site. 
-4. In order for some integration tests to function, make sure you **don't** have a user named **'Alice'** stored within the database. The purpose of the test is to ensure the admin can create a new user account on the admin panel. In order to check whether the user account doesn't exist, go to the following link:  
-http://linkofthewebsite/admin/auth/user/  
+5. In order for some integration tests to function, make sure you **don't** have a user named **'Alice'** stored within the database. The purpose of the test is to ensure the admin can create a new user account on the admin panel. In order to check whether the user account doesn't exist, go to the following link:  
+https://linkofthewebsite/admin/auth/user/  
 Replace **linkofthewebsite** with the url of your deployed site. 
-5. Open the **'tests.py'** file located on the working directory of the STS application present on your local machine. It is stored inside the **team_charlie_2020/accounts** directory.
-6. In the **'tests.py'** file, replace all occurrences of **'http://127.0.0.1:8000/login/'** with the login link of your Azure deployed site.
-7. In order to run the tests on the local machine, **'cd'** into the working directory of the STS application on your local machine. 
-8. Now to run the tests, run the following command on the terminal:  
+6. Open the **'tests.py'** file located on the working directory of the STS application present on your local machine. It is stored inside the **team_charlie_2020/accounts** directory.
+7. In the **'tests.py'** file, replace all occurrences of **'http://127.0.0.1:8000/login/'** with the login link of your Azure deployed site.
+8. In the **'tests.py'** file, within **'def test_redirect_home_if_not_logged_in(self)'** replace **'response = self.client.get('/')'** with **'response = self.client.get('https://linkofthewebsite/')'**.
+9. In the **'tests.py'** file, within **'def test_redirect_locations_if_not_logged_in(self)'** replace **'response = self.client.get('/locations/')'** with **'response = self.client.get('https://linkofthewebsite/locations/')'**.
+10. In the **'tests.py'** file, within **'def test_redirect_auditlogs_if_not_logged_in(self)'** replace **'response = self.client.get('/auditlogs/')'** with **'response = self.client.get('https://linkofthewebsite/auditlogs/')'**
+11. In the **'tests.py'** file, within **'def test_redirect_users_if_not_logged_in(self)'** replace **'response = self.client.get('/users/')'** with **'response = self.client.get('https://linkofthewebsite/users/')'**
+12. In order to run the tests on the local machine, **'cd'** into the working directory of the STS application on your local machine. 
+13. Now to run the tests, run the following command on the terminal:  
 **python manage.py test accounts**
-9. Upon running the tests, you should see the following message displayed in the image:  
+14. Upon running the tests, you should see the following message displayed in the image:  
 ![Image33](https://github.com/UoA-CS5942/team_charlie_2020/blob/master/static/images/testing.jpg?raw=true)  
 
 
@@ -409,7 +418,9 @@ ___
 
 # USER MANUAL OF STS APPLICATION
 
-In order to provide the operational status of Fendercare STS process, the web application is developed with the help of NoSQL Mongo database that has embedded all the related data in a single collection called Entry. This Entry collection allows admin users of the STS web application to add the STS process details for each location which is then stored in the Mongo atlas and Microsoft Azure cloud server. Consequently, any client user can login to the STS web application to manage information and logistics of the STS operations online without any manual processes.
+The user manual is intended to facilitate users of STS web application to understand the features and functionalities and able to use the STS application with ease.
+
+In order to provide the operational status of Fendercare STS transfer process, the web application is developed with the help of NoSQL Mongo database that has embedded all the related data in a single collection called Entry. This Entry collection allows admin users of the STS web application to add the STS details for each location through a superuser login which has been granted with all available permissions, so that the admin users can effectively manage the information and logistics of the STS operations online without any manual processes. There is a separate login for normal users who have limited permissions only to view certain pages of the STS application.
 
 ## 1. Authentication and Authorization for admin users
 
@@ -503,7 +514,9 @@ Having said that, the superuser will have an option to assign some users to admi
 ### Steps to be followed by Superuser to assign restricted admin rights permissions to the normal user 
 
 **i.** Select the **'users'** from the 'Authentication and Authorization' section of the admin page and enter the name of the user in the search bar whom you would like to allow permissions.
+
 **ii.**	It displays the personal information and the already available permissions for that particular user. In permissions section, the **‘staff status’** checkbox is not selected by default. The admin shall first select the **‘staff status’ to authorize the admin page view for the normal user** as mentioned below.
+
 **iii.** Ensure that **‘superuser status’ checkbox is not selected for the normal user** because this option will allow any normal user to have the complete superuser rights in the admin page.
 
 ![Image53](https://github.com/UoA-CS5942/team_charlie_2020/blob/master/static/images/screenshot11.png)
@@ -607,7 +620,7 @@ As web security is vital for managing the confidential information of the compan
 
 Admin user can audit the changes made by the admin users by clicking the ‘Audit logs’ page. It has three categories of logs such as user logs, location entry logs and blacklisted user logs. 
 
-**i. Location entry logs**
+**i.** Location entry logs**
 
 Location entry logs displays all the saved changes made by admin users for updating the location fields in the entry. 
 
